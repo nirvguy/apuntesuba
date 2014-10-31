@@ -1,0 +1,66 @@
+\usepackage{framed}
+% Flags varios
+\newif\ifversionlarga %Flags para imprimir o nó las demostraciones
+\newif\ifcolores %Flags para imprimir los colores o no por si parecen muy gay
+\colorestrue
+\newcommand{\elemento}[1]{  {\textbf{\underline{#1}:}} \ }
+\newcommand{\elemColor}[2] {\elemento {#2}}
+%si existe el paquete xcolor entonces las propiedades,operaciones,definiciones,etc son con colores
+\IfFileExists{xcolor.sty}
+{
+	\ifcolores
+		\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
+		\renewcommand{\elemColor}[2]{{\color{##1} \elemento {##2}}}
+	\fi
+} %si no existe el paquete son sin colores
+{
+
+}
+\newcommand{\propiedadColor}[1]{\elemColor{OliveGreen}{#1}}
+\newcommand{\lemaColor}[1]{\elemColor{OliveGreen}{#1}}
+\newcommand{\operacionColor}[1]{\elemColor{OliveGreen}{#1}}
+\newcommand{\definicionColor}[1]{\elemColor{blue}{#1}}
+\newcommand{\observacionColor}[1]{\elemColor{Purple}{#1}}
+\newcommand{\teoremaColor}[1]{\elemColor{Mahogany}{#1}}
+\newcommand{\notacionColor}[1]{\elemColor{Dandelion}{#1}}
+\newcommand{\ejemploColor}[1]{\elemColor{Sepia}{#1}}
+% Comandos para algunas expresiones matemáticas específicas %
+\providecommand{\abs}[1]{\left\lvert#1\right\rvert}
+\providecommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand{\cis}[1]{\cos \left( #1 \right) + i \cdot \sin \left( #1 \right)}
+% Comandos para las definiciones, observaciones, ejemplos, teoremas, etc.
+\newcommand{\definicion}{\definicionColor{Definición}}
+\newcommand{\observacion}{\observacionColor{Observación}}
+\newcommand{\ejemplo}{\ejemploColor {Ejemplo}}
+\newcommand{\teorema}{\teoremaColor {Teorema}}
+\newcommand{\propiedad}{\propiedadColor {Propiedad}}
+\newcommand{\propiedades}{\propiedadColor{Propiedades}}
+\newcommand{\propiedadA}[1]{\propiedadColor{Propiedad (#1)}}
+\newcommand{\propiedadesA}[1]{\propiedadColor{Propiedades (#1)}}
+\newcommand{\definicionA}[1]{\definicionColor {Definición (#1)}}
+\newcommand{\lema}{\lemaColor{Lema}}
+\newcommand{\teoremaDe}[1]{\teoremaColor {Teorema de #1}}
+\newcommand{\teoremaB}[1]{\teoremaColor {Teorema #1}}
+\newcommand{\notacion}{\notacionColor {Notación}}
+\newcommand{\nota}{\notacionColor{Nota}}
+\newcommand{\puntual}{\elemento {Función de probabilidad puntual}}
+\newcommand{\acumulada}{\elemento {Función de distribución acumulada}}
+\newcommand{\esperanza}{\elemento {Esperanza}}
+\newcommand{\varianza}{\elemento {Varianza}}
+\newcommand{\rangoVar}{\elemento {Rango}}
+\newcommand{\generadora}{\elemento {Función generadora de momentos}}
+\newcommand{\dado}{\mid}
+\newcommand{\distribucion}{\elemento {Nombre de la distribución}}
+\newcommand{\operaciones}{\operacionColor {Operaciones}}
+\newcommand{\operacionesDe}[1]{\operacionColor {Operaciones #1}}
+\newcommand{\corolario}{\elemento {Corolario}}
+\newcommand{\defsucesion}[2][n]{\left( {#2}_{#1} \right)_{#1 \in \mathbb{N}}}
+\newcommand{\deflsucesion}[2]{\forall \varepsilon > 0 \ \ \exists n_0 \ / \ \abs{#1_n-#2} < \varepsilon  \mbox{ si } n \geq n_0}
+\newcommand{\rene}[1][n]{\mathbb{R}^{#1}}
+\newcommand{\pesc}[2]{\left\langle {#1},{#2} \right\rangle}
+% Environments personalizados
+%Environment para demostraciones
+\newenvironment{demo}
+{\begin{framed}\textbf{\emph{Demostración}}: \par\indent}
+{\hspace{\stretch{1}}$\blacksquare$\end{framed}}
+
