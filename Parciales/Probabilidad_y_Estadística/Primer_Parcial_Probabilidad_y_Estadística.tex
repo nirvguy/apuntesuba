@@ -1,0 +1,167 @@
+% Copyright (c) 2013-02-15 Sosa Juan Cruz
+%  Permission is granted to copy, distribute and/or modify this document
+%   under the terms of the GNU Free Documentation License, Version 1.3
+%   or any later version published by the Free Software Foundation;
+%   with no Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts.
+%   A copy of the license is included in the section entitled "GNU
+%    Free Documentation License". 
+\documentclass[a4paper,10pt]{article}
+\textheight=25cm %Establece el largo del texto en cada página. El default es 19 cm. 
+\textwidth=17cm %Establece el ancho del texto en cada página (en este caso, de 17 cm). El default es 14 cm. 
+\topmargin=-1cm %Establece el margen superior. El default es de 3 cm, en este caso la instrucción sube el margen 1 cm hacia arriba. 
+\oddsidemargin=0mm %Establece el margen izquierdo de la hoja. El default es de 4.5 cm; sin embargo, con sólo poner esta instrucción el margen queda en 2.5 cm. Si el parámetro es positivo se aumenta este margen y si es negativo disminuye. 
+\parindent=0mm %elimina la sangría.
+\renewcommand{\baselinestretch}{2} 
+\usepackage[utf8x]{inputenc} % Paquete de idioma que incluye escritura latina
+\usepackage{amssymb}        % Paquete para símbolos matemáticos
+\usepackage{amsmath}
+\usepackage{graphicx}       % Paquete para insertar imágenes
+\usepackage[colorlinks=true,linkcolor=black,urlcolor=black]{hyperref} 
+\usepackage{bookmark}       % Índice por Secciones en el PDF
+\usepackage[spanish,es-nolists]{babel}
+\title{ Resolución Primer parcial Probabilidad y Estadística }
+%\setcounter{secnumdepth}{3}
+\author{Juan Cruz Sosa}
+\date{30 de Mayo de 2013}
+%%%%%%%%%%%%%%%% ESTO HACE QUE NO APAREZCA LA NUMERACIÓN EN LAS SECCIONES SALVO EN EL ÍNDICE %%%%%%%%%%%%%%%%%%%%%%
+%\makeatletter													 %%
+%\renewcommand\@seccntformat[1]{}										 %%
+%\makeatother												         %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\providecommand{\abs}[1]{\lvert#1\rvert}
+\providecommand{\norm}[1]{\lVert#1\rVert}
+\newcommand{\elemento}[1]{  {\underline{#1}:} \ }
+\newcommand{\definicion}{\elemento {Definición}}
+\newcommand{\observacion}{\elemento {Observación}}
+\newcommand{\ejemplo}{\elemento {Ejemplo}}
+\newcommand{\demostracion}{\elemento {Demostración}}
+\newcommand{\teorema}{\elemento {Teorema}}
+\newcommand{\propiedad}{\elemento {Propiedad}}
+\newcommand{\propiedades}{\elemento {Propiedades}}
+\newcommand{\propiedadA}[1]{\elemento {Propiedad (#1)}}
+\newcommand{\definicionA}[1]{\elemento {Definición (#1)}}
+\newcommand{\teoremaDe}[1]{\elemento {Teorema de #1}}
+\newcommand{\notacion}{\elemento {Notación}}
+\newcommand{\puntual}{\elemento {Función de probabilidad puntual}}
+\newcommand{\acumulada}{\elemento {Función de distribución acumulada}}
+\newcommand{\esperanza}{\elemento {Esperanza}}
+\newcommand{\varianza}{\elemento {Varianza}}
+\newcommand{\rango}{\elemento {Rango}}
+\newcommand{\generadora}{\elemento {Función generadora de momentos}}
+\newcommand{\dado}{\mid}
+\newcommand{\distribucion}{\elemento {Nombre de la distribución}}
+\newcommand{\poisson}[2]{\frac{#2^{#1}}{#1!}e^{-#2}}
+\newcommand{\standN}[3]{\frac{#1-#2}{#3}}
+\newcommand{\standP}[3]{\frac{#1+#2}{#3}}
+\newcommand{\binomial}[3]{\binom{#1}{#3}{#2}^{#3}{(1-#2)}^{#1-#3}}
+\begin{document}
+\maketitle
+\begin{enumerate}
+\item 
+\begin{enumerate}
+\item
+12 paradas \\
+9 personas \\
+Defino S mi espacio muestral como $S = \left\lbrace (p_1,\dots,p_9) \mbox { con } p_1,\dots,p_9 \in \left\lbrace b_1,\dots,b_{12} \right\rbrace \right\rbrace$ \\
+$p_i =$ persona $i$, $b_j = $ bajada $j$ \\
+Defino el evento $A_i$ como $A_i = $ persona $i$ se baja en parada de $1$ a $3$ \\
+$P(\mbox{Todos se bajan antes de la cuarta parada}) = P(A_1 \cap \dots \cap A_9)$ \\
+y como son eventos independientes (cada persona selecciona al azar una parada en la que bajará) \\
+$P(A_1 \cap \dots \cap A_9) = P(A_1) \dots P(A_9) = { \left( \frac{3}{12} \right)}^{9}=\frac{1}{262144}$
+\item
+Redefino mi espacio $S = \left\lbrace (p_1,\dots,p_9) \mbox { con } p_1,\dots,p_9 \in \left\lbrace b_1,\dots,b_{12} \right\rbrace \mbox{ con } p_i = p_j \Rightarrow i = j \right\rbrace$ \\
+$B_i = $ persona $i$ se baja en la parada del 1 a 12 \\
+$P(\mbox{En ninguna parada se baje más de una persona}) = P(B_1 \cap \dots \cap B_9) = P(B_1) \dots P(B_9) = \frac{\frac{12!}{(12-3)!}}{(12)^{9}} = 0.01547$  
+\item 
+Con $S$ del item a \\
+$C = $entre la quinta y la sexta parada solo bajen 2 personas \\
+$P(A) = \frac{\binom{9}{2}\cdot 2 \cdot 2 \cdot (10)^{7}}{(12)^{7}}$
+\end{enumerate}
+\item 
+\begin{enumerate}
+\item
+$X = \mbox{ Número de buques que llegan en un día a un puerto }$ \\
+$X \sim Poisson(2)$ \\
+$P(\mbox{ enviar a otro puerto algún bote }) = P(X > 3) = 1-P(X \leq 3) = \\ =1-\left(P(X=0)+P(X=1)+P(X=2)+P(X=3) \right) = 1-\poisson {0}{2}-\poisson {1}{2}-\poisson {2}{2}-\poisson {3}{2} \simeq 0.1429$
+\item 
+Como es Poisson de parámetro 2, $E(X) = 2$. \\
+La esperanza de número de buques estacionados diariamente en dicho puerto es
+(no sé como expresar esto) $E... = \displaystyle \sum_{i=0}^{3} {xP(X=x)} = 1\poisson{1}{2}+2\poisson{2}{2}+3\poisson{3}{2} \simeq 1.3534$ \\
+Lo otro no tengo idea de como se responde...
+\item
+$Y = \mbox{número de buques que se derivan a otro puerto}$ \\
+$W = \mbox{Sueldo diario de la encargada}$ \\
+entonces $W = 50Y+100$ \\
+por lo tanto y por linealidad de la esperanza $E(W) = E(50X+100) = 50E(Y)+100$
+(y ahora no se como plantear la esperanza de Y)
+\end{enumerate}
+\item
+\begin{enumerate}
+\item 
+$X \sim N(1,4); \ E(X) = \mu_X = 1; \ \sqrt{Var(X)} = \sigma_X = 2$ \\
+$Y \sim N(-1,4);\ E(Y) = \mu_Y = -1; \ \sqrt{Var(Y)} = \sigma_Y = 2$ \\
+Sea $Z \sim N(0,1)$ entonces $\frac{X-1}{2}=Z \sim N(0,1)$ y $\frac{Y+1}{2}=Z \sim N(0,1)$ \\
+$\displaystyle \int_{0}^{1} {f_X(x)dx} = P(0 < X < 1) = P \left( \standN {0} {1} {2} < \standN {X} {1} {2} < \standN {1} {1} {2} \right) = P(-\frac{1}{2} < Z < 0) = \phi(1/2) - \phi(0) \simeq 0.6915-0.5 \simeq 0.1915$
+\item
+$P(\abs{3Y} \geq 5)=1-P(\abs{3Y} < 5)=1-P(-5 < 3Y < 5) = 1-P(-\frac{5}{3} < Y < \frac{5}{3})=1-P \left( \standP {-\frac{5}{3}} {1} {2} < \standP {Y}{1}{2} < \standP {\frac{5}{3}} {1} {2} \right) = 1-P(-\frac{1}{3} < Z < \frac{4}{3}) = 1-\phi(4/3) - \phi(1/3) + 2 \phi (0) \simeq 0.4625$
+\item
+$P \left( \left\lbrace X > a \right\rbrace \cup \left\lbrace Y < -a \right\rbrace \right) = 0.81 \Leftrightarrow P(\left\lbrace X > a \right\rbrace) + P(\left\lbrace Y < -a \right\rbrace) - P \left( \left\lbrace X > a \right\rbrace \cap \left\lbrace Y < -a \right\rbrace \right) = 0.81 \\
+\Leftrightarrow 1-P(X<a)+P(Y<-a)-P(X>a,Y<-a)=1-P(\standN {X}{1}{2} < \standN {a}{1}{2})+P(\standP{Y}{1}{2} < \standP {a}{1}{2})-\\P(X>a,Y<-a) = 1-P(Z<\standN {a}{1}{2})+P(Z<\standP {a}{1}{2})-P(X>a,Y<-a)=0.81$ \\
+Como $X$ e $Y$ son independientes \\
+$P(X>a,Y<-a) = P(X>a)P(Y<-a) = \left( 1-P(X<a) \right) P(Y<-a)$ \\
+Además como la $N(0,1)$ es simétrica respecto del origen \\
+$P(Z < \standP {-a}{1}{2}) = 1-P(Z < \standN {a}{-1}{2})$ \\
+Por lo tanto \\
+$P \left( \left\lbrace X > a \right\rbrace \cup \left\lbrace Y < -a \right\rbrace \right) = \left( 1-P \left( Z < \standN {a}{1}{2} \right) \right) + \left( 1-P \left( Z < \standN {a}{1}{2} \right) \right) -  \left( 1-P \left( Z < \standN {a}{1}{2} \right) \right) \left( 1-P \left( Z < \standN {a}{1}{2} \right) \right)\\=0.81 $ \\
+Si nombro $w = \left( 1-P \left( Z < \standN {a}{1}{2} \right) \right)$ \\
+Me queda \\
+$P \left( \left\lbrace X > a \right\rbrace \cup \left\lbrace Y < -a \right\rbrace \right) = 2w-w^{2}=0.81$
+Entonces $w = 1.44721$ o $w = 0.5641$ \\
+con $w = 1.44721$ no puede ser pues queda una probabilidad negativa \\
+y con $w = 0.5641$ \\
+$1-P \left( Z < \standN {a}{1}{2} \right) = 0.5651 \Leftrightarrow \\
+P \left( Z < \standN {a}{1}{2} \right) = 0.4359 \Leftrightarrow \\
+\phi \left( \standN {a}{1}{2} \right) = 0.4359 \Leftrightarrow \\
+ \standN {a}{1}{2} = -0.16 \Leftrightarrow a = 0.68$
+\end{enumerate}
+\item
+\begin{enumerate}
+\item
+$X \dado M = \mbox{ cantidad de cerveza ingerida por una mujer }$ \\
+$X \dado H = \mbox{ cantidad de cerveza ingerida por un hombre }$ \\
+$X \dado M \sim Exp(\frac{2}{5})$ y $X \dado M \sim U[0,4]$ \\
+$P(\mbox{ María se emborrache si se emborracha cuando toma más de 3 litros de cerveza }) = \\
+P((X \dado M) \geq 3) = 1-P((X \dado M) < 3) = 1 - \displaystyle \int_{-\infty}^{3} {f_{X \dado M}(x)dx} = 1 - \int_{-\infty}^{3} {\frac{2}{5}e^{\frac{2}{5}x}I_{(0,+\infty)}dx} = 1 - \int_{0}^{3} {\frac{2}{5}e^{\frac{2}{5}x}dx} = e^{\frac{6}{5}} \simeq 0.30$
+\item
+$P(\mbox{ Juan tome menos de tres litros de cerveza si había bebido al menos un litro }) = \\
+P((X \dado H) < 3 \dado (X \dado H) \geq 1) = \frac {P((X \dado H) < 3 \cap (X \dado H) \geq 1)}{P((X \dado H) \geq 1)}=\frac{\frac{1}{2}}{\frac{3}{4}}=\frac{2}{3} $ porque \\
+$\displaystyle P(1 \leq (X \dado H) \leq 3) = \int_{1}^{3} {f_{X \dado H}(x)dx} = \frac{1}{4} \int_{1}^{3} {dx} = \frac{1}{2}$ y \\
+$\displaystyle P((X \dado H) \geq 1) = \int_{1}^{\infty} {f_{X \dado H}(x)dx} = \frac{1}{4} \int_{1}^{4} {dx} = \frac{3}{4}$ 
+\item
+$X = \mbox {cantidad ingerida de cerveza de un invitado de la fiesta}$ \\
+Por probabilidad total \\
+$P(X>3)=P(X>3 \dado H) P(H) + P(X>3 \dado M) P(M)=\\
+P((X \dado H) > 3)P(H)+P((X \dado M) > 3)P(M)$ \\
+y como $P(H) = \frac{18}{40}$ (son 18 hombres de cuarenta total en la fiesta) $P(M) = \frac{22}{40}$ (y 22 mujeres de los 40) y \\
+$P(X>3)=\frac{1}{4}\frac{18}{40}+0.7\frac{1}{2}=0.4975$ porque \\
+$P((X \dado H) > 3)=\frac{1}{4}\int_{3}^{4} {dx} = \frac{1}{4}$
+\item
+$Y=\mbox{ Cantidad de personas que se emborracharon en la fiesta }$ \\
+como considero las alcoholizaciones de la gente independiente
+$Y \sim Bi (40,0.4975)$
+$P(Y \geq 2) = 1-P(Y<2)=1-(P(Y=0)+P(Y=1))=1-\binomial{40}{0.4975}{0}-\binomial{40}{0.4975}{1} \simeq 1$
+\end{enumerate}
+\item 
+\begin{enumerate}
+\item $(X,Y)$ vector aleatorio \\
+$f_{(X,Y)}(x,y) = c(x+1)yI_{(0,1)}(y)I_{(-y,y)}(x)$ \\
+$\displaystyle \int_{-\infty}^{+\infty}{\int_{-\infty}^{+\infty} {f_{(X,Y)}(x,y)dxdy}} = 1 \Leftrightarrow$\\
+$\displaystyle \int_0^1 {\int_{-y}^{y}}{c(x+1)ydxdy} = c\int_{0}^{1} {2y^{2}} = c\frac{2}{3} = 1 \Leftrightarrow c=\frac{3}{2}$ \\ \\
+$\displaystyle P \left( (X,Y) \in \left[ 0,\frac{1}{2} \right] \times \left[ 0,\frac{3}{2}\right] \right) = P(0<X<\frac{1}{2},0<Y<\frac{3}{2}) = \\ \frac{3}{2}\int_{0}^{\frac{1}{2}}{\int_{x}^{\frac{3}{2}} {(x+1)yI_{(0,1)}(y)I_{(-y,y)}(x)dydx}} = \frac{3}{2}\int_{0}^{\frac{1}{2}}{\int_{x}^{1} {(x+1)y}dydx} = \frac{3}{2} \int_{0}^{1/2} { \left( \frac{1}{2} + \frac{x}{2} - \frac{x^{2}}{2} - \frac{x^{3}}{2} \right) dx} \\ = \frac{109}{256} \simeq 0.4257$
+\item $\displaystyle P(Y \leq 2X) = P \left( (X,Y)\in\left\lbrace (x,y) \in \mathbb{R}^{2} / y \leq 2x \right\rbrace \right) = \frac{3}{2} \int_{0}^{1} {\int_{y/2}^{y} {(x+1)ydxdy}} = \frac{3}{2} \int_{0}^{1} { \left( \frac{3}{8}y^{3}+\frac{1}{2}y^{2} \right) dy} = \frac{25}{64}$
+\item $\displaystyle f_X(x) = \int_{-\infty}^{+\infty} {f_{(X,Y)}(x,y)dy} = \frac{3}{2} \int_{-\infty}^{+\infty} {(x+1)yI_{(0,1)}(y)I_{(-y,y)}(x)dy} = \\ \frac{3}{2} \int_{-\infty}^{+\infty} {(x+1)yI_{(-1,0)}(x)I_{(-x,1)}dy} + \frac{3}{2} \int_{-\infty}^{+\infty} {(x+1)yI_{(0,1)}(x)I_{(-x,1)}dy} = \\ \frac{3}{2} \left( \int_{-x}^{1} {(x+1)ydy} \right) I_{(-1,0)}(x) + \frac{3}{2} \left( \int_{x}^{1} {(x+1)y(x)dy} \right) I_{(0,1)}(x) = \\
+\frac{3}{2}(x+1) \left( \left( \frac{1}{2} - \frac{x^{2}}{2} \right) I_{(-1,0)}(x) + \left( \frac{1}{2} - \frac{x^{2}}{2} \right) I_{(0,1)}(x) \right) = \frac{3}{2}(x+1) \left( \frac{1}{2}-\frac{x^{2}}{2} \right )I_{(-1,1)}(x)$ \\ \\
+$ \displaystyle f_Y(y) = \int_{-\infty}^{+\infty} {f_{(X,Y)}(x,y)dx} = \frac{3}{2} \int_{-\infty}^{+\infty} {(x+1)yI_{(0,1)}(y)I_{(-y,y)}dx} = \frac{3}{2} I_{(0,1)}(y)y \int_{-y}^{y} {(x+1)dx} \\ =  3 \frac{y^{2}}{2} I_{(0,1)}(y) $
+\end{enumerate}
+\end{enumerate}
+\end{document}
