@@ -1,0 +1,276 @@
+% Copyright (c) 2013-02-15 Sosa Juan Cruz
+%  Permission is granted to copy, distribute and/or modify this document
+%   under the terms of the GNU Free Documentation License, Version 1.3
+%   or any later version published by the Free Software Foundation;
+%   with no Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts.
+%   A copy of the license is included in the section entitled "GNU
+%    Free Documentation License". 
+\documentclass[a4paper,10pt]{article}
+\textheight=25cm %Establece el largo del texto en cada página. El default es 19 cm. 
+\textwidth=17cm %Establece el ancho del texto en cada página (en este caso, de 17 cm). El default es 14 cm. 
+\topmargin=-1cm %Establece el margen superior. El default es de 3 cm, en este caso la instrucción sube el margen 1 cm hacia arriba. 
+\oddsidemargin=0mm %Establece el margen izquierdo de la hoja. El default es de 4.5 cm; sin embargo, con sólo poner esta instrucción el margen queda en 2.5 cm. Si el parámetro es positivo se aumenta este margen y si es negativo disminuye. 
+\parindent=0mm %elimina la sangría. 
+\usepackage[utf8x]{inputenc} % Paquete de idioma que incluye escritura latina
+\usepackage{amssymb}        % Paquete para símbolos matemáticos
+\usepackage{amsmath}
+\usepackage{graphicx}       % Paquete para insertar imágenes
+\usepackage[colorlinks=true,linkcolor=black,urlcolor=black]{hyperref} 
+\usepackage{bookmark}       % Índice por Secciones en el PDF
+\usepackage[spanish,es-nolists]{babel}
+\title{ Apuntes de Análisis II }
+%\setcounter{secnumdepth}{3}
+\author{Juan Cruz Sosa \\ Guido Rajngewerc}
+\date{23 de Mayo de 2013}
+%%%%%%%%%%%%%%%% ESTO HACE QUE NO APAREZCA LA NUMERACIÓN EN LAS SECCIONES SALVO EN EL ÍNDICE %%%%%%%%%%%%%%%%%%%%%%
+%\makeatletter													 %%
+%\renewcommand\@seccntformat[1]{}										 %%
+%\makeatother												         %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{../macros/matematica}
+%%%%%%%%%%%%% ESTO HACE QUE SE IMPRIMAN LAS DEMOSTRACIONES
+\versionlargatrue
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\maketitle
+\tableofcontents 
+\clearpage
+
+\section{Introducción}
+\subsection{Supremos e ínfimos}
+\propiedad Seaa $A \in \mathbb{R}$, $s = sup(A) \Leftrightarrow$
+\begin{tabular}{l}
+	s es cota superior de A
+	\cr $\forall \varepsilon > 0$, $\exists a \in A$ tq $s-\epsilon < a$
+\end{tabular}
+\footnote{La segunda condición es una manera rigurosa de decir que $s-\varepsilon$ dejó de ser cota superior, porque s es la menor de las cotas superiores} 
+\ifversionlarga
+\\
+\begin{demo}
+	\begin{itemize}
+		\item $\Rightarrow)$ Como $s=sup(A)$ en particular $s$ es cota superior de A \\
+		Además sea $\varepsilon > 0 \Rightarrow s-\varepsilon<a$ (pues s es la
+		menor de todas) $\Rightarrow \exists a \in A$ tq $s - \varepsilon < a$
+		\item $\Leftarrow)$ Solo debo ver que si $m$ es cota superior de $A$ $\Rightarrow s \leq m$ \\
+		Supongamos que $\exists m \in \mathbb{R}$ cota superior de A con $m < s$ \\
+		Eligiendo $\varepsilon=s-m$ nos queda que $\exists a \in A$ tq $s-\varepsilon < a$ pero $s-\varepsilon$ = $s-(s-m)=m<a$. \\
+		Lo cual es absurdo pues m es cota superior de A. \\
+		$\Rightarrow \forall m \in \mathbb{R}$, $m$ cota superior de A $\Rightarrow m \geq s$ \\
+		Luego $s=sup(A)$
+	\end{itemize}
+\end{demo}
+\fi
+\subsection{Sucesiones}
+\definicion Una sucesión es una función $a : \mathbb{N} \longrightarrow \mathbb{R}$ \\ \\
+\notacion $a : \mathbb{N} \longrightarrow \mathbb{R}$ se escribe $\defsucesion{a}$ y en vez de $a(n)$ escribimos $a_n$\\ \\
+\definicion $\lim_{n \to \infty} a_n = a \Leftrightarrow \deflsucesion{a}{a}$
+\hspace{1em}
+\footnote{\label{lim:suc}La noción conceptual de la definición de límite es que siempre que me
+den un intervalo (que puede ser tan chico como quieran) alrededor de $a$ tengo
+que poder encontrar $n_0$ que me garantice que de ahí para adelante todos los
+valores de la sucesión caen dentro del intervalo. Por eso además $n_0$ suele
+ser en función del $\varepsilon$} \\ \\ \definicion $\defsucesion{a}$ es
+creciente si $a_1 \leq a_2 \leq \dots \leq a_n \leq a_{n+1} \leq \dots$ \\ \\
+\lema Si una sucesión es creciente y acotada tiene límite
+\ifversionlarga
+\\
+\begin{demo}
+	$A=\left\lbrace a_n / n \in \mathbb{N} \right\rbrace$. Sea $s=sup(A)$. \\
+	Quiero ver que $\lim_{n \to \infty} a_n = s$ es decir $\deflsucesion{a}{s}$ \\
+	Como $s$ es cota superior $s-a_n \geq 0$, entonces solo me queda ver que $s-a_n < \varepsilon \Leftrightarrow s-\varepsilon < a_n$ \\
+	Por la propiedad anterior $\forall \varepsilon > 0, \ \exists a_{n_0} / \ \ s-\varepsilon < a_{n_0}$ \\
+	Por ser creciente, si $n \geq n_0 \Rightarrow a_n \geq a_{n_0} > s - \varepsilon$
+\end{demo}
+\fi
+\hspace*{\fill} \\
+\hspace*{\fill} \\
+\propiedad Sea $A \subset \mathbb{R}$ acotado superiormente,s es cota superior \\ $s = sup(A)
+	\Leftrightarrow \exists \defsucesion{a} \subseteq A \mbox{(creciente)} / \lim_{n
+	\to \infty} a_n = s$ 
+\ifversionlarga
+\begin{demo}
+	\begin{itemize}
+		\item $\Leftarrow)$ Se desprende del lema anterior
+		\item $\Rightarrow)$ si $s \subseteq A$ elijo $a_n = s$ entonces se cumple trivialmente $\lim_{n \to \infty} a_n = s$ \\
+		si $s \not\subseteq A$ elijo $a_n = s-\frac{1}{n}$. \\
+		Quiero ver que $\forall \varepsilon > 0, \exists n_0 / \abs{a_n-s} < \varepsilon \ \ \forall n \geq n_0$. \\
+		$\abs{a_n-s} = \abs{s-\frac{1}{n}-s} = \frac{1}{n} < \varepsilon$. Basta tomar $n_0 \geq \frac{1}{\varepsilon}$ que siempre se puede por Arquimedianeidad de $\mathbb{N}$ \\
+		$\defsucesion{a}$ es creciente pues $n+1>n \Leftrightarrow \frac{1}{n+1}<\frac{1}{n} \Leftrightarrow s-\frac{1}{n+1}>s-\frac{1}{n} \Leftrightarrow a_{n+1} > a_{n}$
+	\end{itemize}
+\end{demo}
+\fi
+\hspace*{\fill} \\
+\hspace*{\fill} \\
+\teoremaB{(Arquimedianeidad de $\mathbb{N}$)} $N \subseteq \mathbb{R}$ no es acotado superiormente (ó $\forall x \in \mathbb{R}, \exists n \in \mathbb{N} / x < n$)
+\ifversionlarga
+\begin{demo}
+	$A = \left\lbrace n \in \mathbb{N} / n \leq x \right\rbrace$. $s = sup(A) = \lfloor x \rfloor$ \\
+	$\Rightarrow \exists n_0 \in A / s - 1 < n_0$.\ \ $s - 1 < n_0 \Leftrightarrow s < n_0 + 1 \Rightarrow (n_0+1) \not\in A \Rightarrow x < n_0 + 1$ 
+\end{demo}
+\fi
+\hspace*{\fill} \\
+\hspace*{\fill} \\
+\teoremaB{(Densidad de $\mathbb{Q}$ en $\mathbb{R}$)} Sean $x,y \in \mathbb{R} \Rightarrow \exists a \in \mathbb{Q} / x < q < y$
+\ifversionlarga
+\begin{demo}
+	$y - x > 0 \Rightarrow \frac{1}{y-x} > 0$ por Arquimedianeidad de $\mathbb{N}$ $\exists n / n > \frac{1}{y-x} \Leftrightarrow n(y-x) > 1$. \\
+	$ny = nx + n(y-x) > nx + 1 \Rightarrow \exists k \in \mathbb{N} / nx < k < ny \Leftrightarrow x < \frac{k}{n} < y$
+\end{demo}
+\fi
+\hspace*{\fill} \\
+\hspace*{\fill} \\
+\propiedad Sea $\defsucesion{a} \subseteq \mathbb{R}$ una sucesión monótona y acotada, entonces tiene límite
+\ifversionlarga
+\begin{demo}
+	
+\end{demo}
+\fi
+\hspace*{\fill} \\
+\hspace*{\fill} \\
+\definicion Sea $\defsucesion[k]{a_n} \subseteq \defsucesion{a}$ se dice subsucesión si $n_1 < n_2 < \dots < n_k < \dots$
+\\ \\
+\propiedad $\lim_{n \to \infty} {a_n} = a$, y $\defsucesion[k]{a_n} \subseteq \defsucesion{a}$, $a_{n_k}$ subsucesión entonces $\lim_{k \to \infty} a_{n_k} = a$ 
+\ifversionlarga
+\begin{demo}
+	Como $\lim_{n \to \infty} a_{n} = a \Leftrightarrow \forall \varepsilon' > 0, \exists {n_0}' / n \geq {n_0}' \Rightarrow \abs{a_n - a} < \varepsilon'$. \\
+	Qvq $\lim_{k \to \infty} a_{n_k} = a \Leftrightarrow \forall \varepsilon > 0, \exists n_0 / n \geq n_0 \Rightarrow \abs{a_{n_k}-a} < \varepsilon$. \\
+	Además como cada elemento de $\defsucesion[k]{a_n}$ es un elemento de $\defsucesion{a} \Rightarrow \abs{a_{n_k} - a} < \varepsilon' < \varepsilon$ si $n > n_0 > n_0'$.\\
+	Basta tomar $n_0 < {n_0}'$ y $\varepsilon' < \varepsilon$
+\end{demo}
+\fi
+\hspace*{\fill} \\
+\hspace*{\fill} \\
+\teoremaDe{Bolzano-Weirstrass} Si $\defsucesion{a} \Rightarrow \exists \defsucesion[k]{a_n} \subseteq \defsucesion{a}$ tq la subsucesión converge
+\subsection{Espacio $\rene$}
+\definicion $\rene = \left\lbrace (x_1,\dots,x_n) \mbox{ con } x_i \in \mathbb{R},i=1 \dots n \right\rbrace$
+\\ \\
+\definicion Sea $\displaystyle P \in \rene$. $\norm{P} = \sqrt{x_1^2+\dots+x_n^2} = \sqrt{\sum_{i=1}^{n} {P_i}^2}$
+\\ \\
+\observacion $\norm{\cdot}$ es la función distancia al $\vec{0}$, $\norm{P}$ es la distancia de $P$ a $\vec{0}$, $\norm{P-Q}$ es la distancia de P a Q
+\\ \\
+\definicion Sea $P,Q \in \rene$. $\pesc{P}{Q} = P_1Q_1 + \dots + P_nQ_n = \displaystyle\sum_{i = 1}^{n} P_iQ_i$
+\\ \\
+\propiedad Sean $P,Q \in \rene$
+\begin{enumerate}
+	\item $\pesc{P}{Q} = \pesc{Q}{P}$
+	\item $\pesc{P}{P} = \norm{P}^2 \geq 0$
+	\item $\pesc{\lambda P}{Q} = \lambda\pesc{P}{Q}$
+	\item $\pesc{P_1 + P_2}{Q} = \pesc{P_1}{Q_1} + \pesc{P_2}{Q_1}$
+	\item $\pesc{\alpha P}{\beta Q} = \alpha\beta\pesc{P}{Q}$
+	\item $\abs{\pesc{P}{Q}} \leq \norm{P}\norm{Q}$
+	\item $\norm{P+Q} \leq \norm{P} + \norm{Q}$
+	\item $\abs{P_i} \leq \norm{P} \ \ \forall i=1,\dots,n$
+	\item $\displaystyle \max_{1 \leq i \leq n} \left( \abs{P_i} \right) \leq \norm{P} \leq \sqrt{n} \cdot \max_{1 \leq i \leq n} \left( \abs{P_i} \right)$
+\end{enumerate}
+\ifversionlarga
+\begin{demo}
+	\begin{enumerate}
+		\item $\displaystyle\pesc{P}{Q} = \sum_{i=0}^{n} P_iQ_i = \sum_{i=0}^{n} Q_iP_i = \pesc{Q}{P}$
+		\item $\displaystyle\pesc{P}{P} = \sum_{i=0}^{n} P_iP_i = \sum_{i=0}^{n} {P_i}^2 = \norm{P}^2 \geq 0$
+		\item $\displaystyle\pesc{\lambda P}{Q} = \sum_{i=0}^{n} \lambda P_iQ_i = \lambda \sum_{i=0}^{n}P_iQ_i = \lambda\pesc{P}{Q}$
+		\item $\displaystyle\pesc{P_1 + P_2}{Q} = \sum_{i=0}^{n} {( P_{1_i} + P_{2_i} ) Q_i} = \sum_{i=0}^{n} P_{1_i}Q_i + \sum_{i=0}^{n} P_{2_i}Q_i = \pesc{P_1}{Q_1} + \pesc{P_2}{Q_1}$
+		\item $\displaystyle\pesc{\alpha P}{\beta Q} = \alpha\pesc{P}{\beta Q} = \alpha\pesc{\beta Q}{P} = \alpha\beta\pesc{Q}{P} = \alpha\beta\pesc{P}{Q}$
+		\item $t \in \mathbb{R}$ y $g(t)=\norm{P-tQ}^2 \\ 
+			\norm{P-tQ}^2=\pesc{P-tQ}{P-tQ}=\pesc{P}{P}-2t\pesc{P}{Q} + t^2\pesc{Q}{Q} = t^2\norm{Q}^2-2t\pesc{P}{Q}+\norm{P}^2 \\
+			P,Q \mbox{ fijos } g(t)=at^2+bt+c \mbox{ con } 
+			\left\{
+			\begin{array}{rcl}
+				a & = & \norm{Q}^2 \\
+				b & = & -2\pesc{P}{Q} \\
+				c & = & \norm{P}^2
+			\end{array}
+			\right. \\
+			\mbox{Además } g(t) = \norm{P-tQ}^2 \geq 0, \mbox{ entonces } g(t) \mbox{ tiene al menos una raiz } \\
+			b^2-4ac \leq 0 \Rightarrow (2\pesc{P}{Q})^2-4\norm{Q}^2\norm{P}^2 \leq 0 \Rightarrow 4\abs{\pesc{P}{Q}} \leq 4\norm{Q}^2\norm{P}^2 \\
+			\displaystyle \Rightarrow \abs{\pesc{P}{Q}} \leq \norm{P}\norm{Q}$
+		\item $\norm{P+Q}^2=\pesc{P+Q}{P+Q}=\norm{P}^2+2\abs{\pesc{P}{Q}}+\norm{Q}^2 \leq \norm{P}^2 + 2\norm{P}\norm{Q} + \norm{Q}^2 = \left( \norm{P} + \norm{Q} \right) \\
+		\Rightarrow \norm{P+Q} \leq \norm{P} + \norm{Q}$
+		\item $\displaystyle\abs{P_i} = \sqrt{P_i^2} \leq \sqrt{{P_1}^2+\dots+{P_i}^2+\dots+{P_n}^2} = \norm{P}$
+		\item $\displaystyle\norm{P} = \sqrt{{P_1}^2+\dots+{P_n}^2} \leq \sqrt{n*\max_{1 \leq i \leq n} \left( {P_i} \right)^2 } = \sqrt{n} \sqrt{\max_{1 \leq i \leq n} \left( {P_i} \right)^2} = \sqrt{n} \max_{1 \leq i \leq n} \left( \abs{P_i} \right)$ \\
+		si $\displaystyle\abs{P_i} \leq \norm{P} \ \ \forall i=1,\dots,n$ (por la prop anterior) $\displaystyle \max_{1 \leq i \leq n} \left( \abs{P_i} \right) \leq \norm{P}$ \\
+		$\Rightarrow \displaystyle \max_{1 \leq i \leq n} \left( \abs{P_i} \right) \leq \norm{P} \leq \sqrt{n} \cdot \max_{1 \leq i \leq n} \left( \abs{P_i} \right)$	
+	\end{enumerate}
+\end{demo}
+\fi
+\hspace*{\fill} \\
+\hspace*{\fill} \\
+\definicionA{Sucesiones en $\rene$} Una sucesión en $\rene$ es una función $P: \mathbb{N} \longrightarrow \rene$
+\\ \\
+\notacion $P: \mathbb{N} \longrightarrow \rene[d]$ se escribe $\defsucesion{P} \subset \rene[d]$ y en vez de $P(n)$ se escribe $P_n$
+\\ \\
+\definicion Sea $\defsucesion{P} \subset \rene[d]$ una sucesión y $L \in \rene[d]$. \\
+$\lim_{n \to \infty} P_n = L \Leftrightarrow \forall \varepsilon > 0, \ \exists n_0 \ / \ \norm{P_n-L} < \varepsilon$ si $n \geq n_0$
+\hspace{1em}
+\footnote{La definición conceptual de límite de sucesiones en $\rene[d]$ es análoga a la de sucesiones en $\rene$. Ver la nota al pie \ref{lim:suc} }
+\\ \\
+\teorema Una sucesión $\defsucesion{P} \subset \rene[d]$ es convergente $\Leftrightarrow \left( P_{n_i} \mbox{ es convergente } \forall i = 1,\dots,d \right)$ \footnote{Es decir una sucesión es convergente sii cada coordenada de la sucesión es convergente}
+\ifversionlarga
+\\
+\begin{demo}
+	\\
+	$P_n = (X_{1_n},\dots,X_{d_n})$ \\
+	\indent $L = (L_1,\dots,L_d)$
+	\begin{itemize}
+		\item $\Leftarrow) \lim_{n \to \infty} X_{i_n} = L_i \Leftrightarrow \forall \varepsilon_i > 0, \exists n_{0_i} \ / \ \abs{X_{i_n}-L_i} < \varepsilon_i$ si $n \geq n_{0_i}$ \\
+		$\lim_{n \to \infty} P_n = L \Rightarrow \exists n_0 \ / \ \norm{P_n - L} < \varepsilon'$ si $n \geq n_0$ con $\displaystyle\varepsilon'=\min_{1 \leq i \leq d} \left( {\varepsilon_i} \right)$ \\
+		$\abs{X_{i_n}-L_i} \leq \norm{P_n-L} < \varepsilon' \leq \varepsilon_i \ \ \forall i=1,\dots,d$
+		\item $\Rightarrow)$ $\lim_{n \to \infty} P_{n} = L \Leftrightarrow \forall \epsilon > 0, \exists n_0 \ / \norm{P_n-L} < \varepsilon$ si $n \geq n_0$ \\
+		$\lim_{n \to \infty} X_{i_n} = L_i \Rightarrow \exists n_{0_i} \ / \ \abs{X_{i_n}-L_i} < \frac{\varepsilon}{\sqrt{d}}$ si $n \geq n_{0_i}$ \\
+		$\displaystyle\norm{P_n - L} \leq \sqrt{d} \max_{1 \leq i \leq d} \left( \abs{X_{i_n}-L_i} \right) < \sqrt{d} \frac{\varepsilon}{\sqrt{d}} = \varepsilon$ \\
+		Basta tomar $\displaystyle n_0 < \min_{1 \leq i \leq d} \left( n_{i_n} \right)$
+	\end{itemize} 
+\end{demo}
+\fi
+\hspace*{\fill} \\
+\hspace*{\fill} \\
+\teorema Sea $\defsucesion{P} \subset \rene[d]$ una sucesión acotada\footnote{Que sea acotada quiere decir que existe una bola de radio R que la contiene, o más formalmente $\forall n, \exists R > 0 \ / \ \norm{P_n} < R$} $\Rightarrow \exists \defsucesion[k]{P_n} \subset \defsucesion{P}$ subsucesión(con $n_k$ creciente) y $L \in \rene[d] / \ \lim_{k \to \infty} P_{n_k} = L$, es decir $\defsucesion[k]{P_n}$ es convergente
+\ifversionlarga
+\\
+\begin{demo}
+	$P_n = (\defsucesion{X_{i}} \dots,\defsucesion{X_d})$ \\
+	$\defsucesion{X_{i}}\subset \mathbb{R} \mbox{ y está acotada } \ \ \ \forall \ i=1,\dots,n$ \\
+	Por Bolzano-Weirstrass $\exists \defsucesion[k]{X_{i_{n}}} \subset \defsucesion{X_{i}}$ subsucesión y $X_i$ tq $\lim_{k \to \infty} X_{i_{n_k}} = X_i$ \\
+	Entonces tomando la sucesión $P_{n_k} = ((X_{i_{n_k}}),\dots,(X_{d_{n_k}}))$ nos queda $\defsucesion[k]{P_{n}} \subset P_{n}$ \\
+	y llamando $P = (X_i,\dots,X_d) \Rightarrow \lim_{k \to \infty}{P_{n_k}} = P$
+\end{demo}
+\clearpage 
+\fi
+\subsection{Funciones}
+\definicion $f:\rene \longrightarrow \mathbb{R}$, $P \in \rene$, decimos que \\ 
+$\displaystyle\lim_{X \to P} f(X) = l \Leftrightarrow \forall \varepsilon > 0,\exists \delta>0 / \ \ 0 < \norm{X-P} < \delta \Rightarrow \abs{f(X)-l} < \varepsilon$
+\footnote{La noción de límite es siempre la misma, en este caso pedimos que para cualquier intervalo alrededor de $l$ siempre tenés que poder dar un bola centrada en $P$ que, pensando que el dominio de la función es esa bola, la imagen de la función te queda toda metida dentro del intervalo que estaba alrededor de $l$. Ver \url{http://www.wikimatematica.org/images/7/79/Limite-2var-def.jpg}}
+\\ \\
+\propiedadesA{Álgebra de límites} Sean $f,g : \rene \Longrightarrow \mathbb{R}$ con $\displaystyle\lim_{X \to P} f(X) = l_1$ y $\displaystyle\lim_{X \to P} g(X) = l_2$
+\begin{itemize}
+	\item $\displaystyle\lim_{X \to P} (f+g)(x) = l_1 + l_2$
+	\item $\displaystyle\lim_{X \to P} (fg)(x) = l_1l_2$
+	\item $\displaystyle\lim_{X \to P} \left(\frac{f}{g}\right)(x) = \frac{l_1}{l_2}$			si $l_2 \neq 0$
+\end{itemize}
+\ifversionlarga
+\begin{demo}
+	$\displaystyle\lim_{X \to P} f(X) = l_1 \Leftrightarrow \forall \varepsilon_1 > 0,\exists \delta_1>0 / \ \ 0 < \norm{X-P} < \delta_1 \Rightarrow \abs{f(X)-l_1} < \varepsilon_1$ \\
+	$\displaystyle\lim_{X \to P} g(X) = l_2 \Leftrightarrow \forall \varepsilon_2 > 0,\exists \delta_2>0 / \ \ 0 < \norm{X-P} < \delta_2 \Rightarrow \abs{g(X)-l_2} < \varepsilon_2$
+	\begin{itemize}
+		\item  $\abs{f(X)+g(X)-(l_1+l_2)} = \abs{f(X)-l_1+g(X)-l_2} \leq \abs{f(X)-l_1}+\abs{g(X)-l_2}$ \\
+		Basta con tomar $d < \min\left\lbrace d_1,d_2 \right\rbrace$ tq \\
+		$\norm{X-P} < \delta_1 \Rightarrow \abs{f(X)-l_1} < \frac{\varepsilon}{2}$ \\
+		$\norm{X-P} < \delta_2 \Rightarrow \abs{g(X)-l_2} < \frac{\varepsilon}{2}$ \\
+		$\Rightarrow \abs{f(X)-l_1}+\abs{g(X)-l_2} < \frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon$
+		\item $\abs{f(X)g(X)-l_1l_2} = \abs{f(X)(g(X)-l_2+l_2)-l_1l_2}= \abs{f(X)(g(X)-l_2)+f(X)l_2-l_1l_2} = \abs{f(X)(g(X)-l_2)+l_2(f(X)-l_1)}=\abs{(f(X)-l_1+l_1)(g(X)-l_2)+l_2(f(X)-l_1)} = \abs{(f(X)-l_1)(g(X)-l_2)+l_1(g(X)-l_2)+l_2(f(X)-l_1)} = \abs{(f(X)-l_1)((g(X)-l_2)+l_2)+l_1(g(X)-l_2)} \leq \abs{f(X)-l_1}(\abs{g(X)-l_2}+\abs{l_2})+\abs{l_1}\abs{g(X)-l_2}$
+		y ahora necesito que me quede algo de la pinta \footnote{No siempre pero muchas veces soluciona muchos ejercicios} $\dots < \frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon$.\\
+		Por lo tanto podríamos pensar que necesitamos que el sumando derecho sea $\abs{l_1}\abs{g(X)-l_2} < \frac{\varepsilon}{2}$. \\
+		Despejando se obtiene que $\abs{g(X)-l_2} < \frac{\varepsilon}{2\abs{l_1}}$ \\
+		Y nos queda que $\abs{f(X)-l_1}(\abs{g(X)-l_2} + \abs{l_2}) < \abs{f(X)-l_1}(\frac{\varepsilon}{2\abs{l_1}} + \abs{l_2})$. Y habíamos dicho que eso tenía que quedar $< \frac{\varepsilon}{2}$.
+		Despejando nuevamente $\abs{f(X)-l_1} < \frac{\varepsilon}{2(\frac{\varepsilon}{2\abs{l_1}}+l_2)}$ \\
+		¿Podemos pedir esas condiciones sobre $\abs{f(X)-l_1}$ y $\abs{g(X)-l_2}$ ? \\ 
+		Sí y no.No, porque nada nos asegura que $l_1 \neq 0$ y no se anule el denominador cuando se hace $\frac{\varepsilon}{2\abs{l_1}}$. Pero si suponemos que $l_2 \neq 0$ sí porque se pueden usar las hipótesis iniciales estableciendo $\varepsilon_1$ tq $\varepsilon_1 < \frac{\varepsilon}{2(\frac{\varepsilon}{2\abs{l_1}}+l_2)}$ con el $\delta_1$ que haga falta para cumplir eso y $\varepsilon_2$ tq $\varepsilon_2 < \frac{\varepsilon}{2\abs{l_1}}$ con su respectivo $\delta_2$ para que pueda cumplirse también (Notar que $\varepsilon_1,\varepsilon_2>0$). \\
+		Y Finalmente nos queda $\abs{f(X)g(X)-l_1l_2} < \abs{f(X)-l_1}(\abs{g(X)-l_2}+\abs{l_2})+\abs{l_1}\abs{g(X)-l_2} < \frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon$ \\
+		Basta tomar $\delta < \min\left\lbrace \delta_1 \delta_2 \right\rbrace$ para asegurarme que se cumplen las dos condiciones que habíamos pedido 
+		\item Si probamos que $\lim_{x \to P} \frac{1}{g(X)} = \frac{1}{l_2}$. Luego aplicando el límite de las multiplicaciones ya está \\
+		$\abs{\frac{1}{g(X)} - \frac{1}{l_2}} = \frac{\abs{g(X)-l_2}}{\abs{g(X)}\abs{l_2}}$. Si pedimos $\delta_2$ tq $\abs{g(X)-l_2}<\frac{l_2}{2}$. Nos queda $-\frac{l_2}{2} < \abs{g(X)} < \frac{l_2}{2} \Rightarrow \abs{g(X)} > \frac{l_2}{2} \Rightarrow \abs{\frac{1}{g(X)}} \leq \frac{2}{l_2} \Rightarrow \frac{2\abs{g(X)-l_2}}{\abs{l_2}^2} < \frac{2\abs{l_2}^2\varepsilon}{2\abs{l_2}^2}$. Tomando $\delta < \min(\delta_{2_1},\delta_{2_2})$
+	\end{itemize}
+\end{demo}
+\fi
+\hspace*{\fill} \\
+\hspace*{\fill} \\
+\end{document}
