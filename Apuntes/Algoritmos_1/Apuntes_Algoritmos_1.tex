@@ -1,0 +1,683 @@
+% Copyright (c) 2013-02-15 Sosa Juan Cruz
+%  Permission is granted to copy, distribute and/or modify this document
+%   under the terms of the GNU Free Documentation License, Version 1.3
+%   or any later version published by the Free Software Foundation;
+%   with no Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts.
+%   A copy of the license is included in the section entitled "GNU
+%    Free Documentation License". 
+\documentclass[a4paper,10pt]{article}
+\textheight=25cm %Establece el largo del texto en cada página. El default es 19 cm. 
+\textwidth=17cm %Establece el ancho del texto en cada página (en este caso, de 17 cm). El default es 14 cm. 
+\topmargin=-1cm %Establece el margen superior. El default es de 3 cm, en este caso la instrucción sube el margen 1 cm hacia arriba. 
+\oddsidemargin=0mm %Establece el margen izquierdo de la hoja. El default es de 4.5 cm; sin embargo, con sólo poner esta instrucción el margen queda en 2.5 cm. Si el parámetro es positivo se aumenta este margen y si es negativo disminuye. 
+\parindent=0mm %elimina la sangría. 
+\usepackage[utf8x]{inputenc} % Paquete de idioma que incluye escritura latina
+\usepackage{amssymb}        % Paquete para símbolos matemáticos
+\usepackage{amsmath}
+\usepackage{graphicx}       % Paquete para insertar imágenes
+\usepackage[colorlinks=true,linkcolor=black,urlcolor=black]{hyperref} 
+\usepackage{bookmark}       % Índice por Secciones en el PDF
+\usepackage[spanish,es-nolists]{babel}
+\title{ Apuntes de Algoritmos I }
+%\setcounter{secnumdepth}{3}
+%\author{Juan Cruz Sosa \\ Guido Rajngewerc \\ Micaela Ranea Sánchez \\ Bruno Winocur}
+\date{23 de Mayo de 2013}
+%%%%%%%%%%%%%%%% ESTO HACE QUE NO APAREZCA LA NUMERACIÓN EN LAS SECCIONES SALVO EN EL ÍNDICE %%%%%%%%%%%%%%%%%%%%%%
+%\makeatletter													 %%
+%\renewcommand\@seccntformat[1]{}										 %%
+%\makeatother												         %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{../macros/matematica}
+\input{../macros/algoritmos}
+\begin{document}
+\maketitle
+\tableofcontents 
+\clearpage
+\section{Especificación}
+\subsection{Introducción}
+\begin{itemize}
+	\item ¿Qué es una computadora? \\
+	Es un dispositivo para hacer operaciones aritméticas calculadas en base a algoritmos
+	\item ¿Que es un algoritmo? \\
+	Un algoritmo es una sucesión finita de pasos primitivos para resolver un problema
+	\item Etapas en el desarrollo de programas 
+	\begin{itemize}
+		\item Especificación: Definición clara y precisa del problema
+		\item Diseño: Elegir una solución y dividir el problema en partes
+		\item Programación: Escribir algoritmos y especificarlos en un lenguaje
+		\item Validación: Ver si el programa cumple con lo especificado
+		\item Mantenimiento: Corregir errores y adaptarlo a nuevos requerimientos
+	\end{itemize}
+\end{itemize}
+\subsection{Etapa de especificación}
+\begin{itemize}
+	\item Definición de especificación \\
+	Una especificación es un contrato, un lenguaje, para formalizar una descripción del problema. La especificación de un programa consta de
+	\begin{itemize}
+		\item Nombre: Da nombre al programa
+		\item Argumentos E/S: Describe que recibe como parámetros y que devuelve
+		\item Precondición: Dice cuales entradas son aceptables (requiere)
+		\item Poscondición: Dice que propiedades cumple la salida (asegura)
+	\end{itemize}
+	\item Contrato de la especificación \\
+	El programador hace un programa de acuerdo a una especificación. El usuario suministra datos que no violan la precondición. Luego el programa devuelve la salida sin violar la poscondición.
+	El programa viola la especificación cuando
+	\begin{itemize}
+		\item Transforma datos que cumplen la precondición en datos que no cumplen la poscondición
+	\end{itemize}
+	El programa no viola la especificación cuando
+	\begin{itemize}
+		\item Se cuelga con datos que no cumplen la precondición
+		\item Transforma datos que no cumplen la precondición en datos que cumplen la poscondición
+		\item Transforma datos que no cumplen la precondición en datos que no cumplen la poscondición
+	\end{itemize}
+	\item Sobre-especificación y Sub-especificación
+	\begin{itemize}
+		\item Sobre-especificación: Imponer una poscondición más restrictiva de lo que se necesita o una precondición más laxa
+		\item Sub-especificación: Imponer una poscondición más laxa o una precondición más restrictiva de lo que se necesita
+	\end{itemize}
+\end{itemize}
+\subsection{Etapa de diseño}
+\begin{itemize}
+	\item Se divide en partes el problema y se decide que parte resuelve que cosa
+	\item Se decide si es necesario dividir las distintas partes en diferentes máquinas
+	\item Se especifica cada parte por separado
+	\item Un programador recibe una sola parte a la vez
+\end{itemize}
+\subsection{Etapa de programación}
+\begin{itemize}
+	\item Se escribe un algoritmo para resolver el problema que buscar llegar a la respuesta en una cantidad finita de pasos
+	\item Se traduce el algoritmo a un lenguaje que la computadora entienda
+	\item Cada lenguaje tiene su propósito como adecuarse a ciertas tareas, etc.
+\end{itemize}
+\subsection{Validación}
+	La validación es para asegurarse de que el programa cumple la especificación del problema
+	Hay dos técnicas
+	\begin{itemize}
+		\item Testing
+		\begin{itemize}
+			\item Probar el programa con muchos datos y controlar si cumple la especificación (cuantos más mas seguro es el testing)
+			\item Se detectan con suerte los errores encontrados
+			\item No es infalible
+		\end{itemize}
+		\item Verificación formal (Demostración formal)
+		\begin{itemize}
+			\item Es demostrar matemáticamente que un programa cumple con la especificación
+			\item Requiere que el lenguaje de especificación sea formal y admita teoría de prueba
+			\item La demostración cubre los infinitos valores de entrada que no cumple el testing
+			\item Es infalible
+		\end{itemize}
+	\end{itemize}
+\subsection{Lenguajes formales}
+	\begin{itemize}
+		\item Sintaxis sencilla
+		\item Limitan lo que se puede expresar
+		\item Explicitan suposiciones
+		\item Relacionan formalmente lo escrito (sintaxis) con el significado (semántica)
+		\item Tienen cálculo para transformar expresiones válidas a otras también válidas
+	\end{itemize}
+\subsection{Lógica proposicional}
+	\begin{itemize}
+		\item Símbolos: $true,false,\perp,\neg,\wedge,\vee,\rightarrow,\leftrightarrow,(,)$
+		\item Variables proposicionales: $p,q,r,\dots$
+		\item Fórmula: 
+		\begin{itemize}	
+			\item $true,false,\perp$ son fórmula
+			\item Cada variable proposicional son fórmula
+			\item $A$ es fórmula, entonces $\neg A$ es fórmula
+			\item $A_1,\dots,A_n$ son fórmula,entonces $(A_1 \wedge \dots \wedge A_n)$ son fórmula
+			\item $A_1,\dots,A_n$ son fórmula,entonces $(A_1 \vee \dots \vee A_n)$ son fórmula
+			\item $A$ y $B$ fórmula, entonces $(A \rightarrow B)$ es fórmula
+			\item $A$ y $B$ fórmula, entonces $(A \leftrightarrow B)$ es fórmula
+		\end{itemize}
+		\item Semántica clásica
+		\begin{itemize}
+			\item 2 valores de verdad
+			\begin{itemize}
+				\item verdadero (1) ($true$)
+				\item falso (0) ($false$)
+			\end{itemize}
+			\item Interpretación
+			\begin{itemize}
+				\item $\neg \equiv$ "no" (negación)
+				\item $\wedge \equiv$ "y" (conjunción)
+				\item $\vee \equiv$ "o" (disyunción, no exclusivo)
+				\item $\rightarrow \equiv$ "si...entonces" (implicación)
+				\item $\leftrightarrow \equiv$ "si y solo si" (equivalencia,doble implicación) 
+			\end{itemize}
+			\item Tablas de verdad
+			\begin{center}
+				\begin{tabular}{| l | c | }
+     				\hline
+     				$p$ & $\neg p$  \\ \hline
+     				1 & 0  \\ \hline
+     				0 & 1  \\ 
+     				\hline
+   				\end{tabular}
+   				\begin{tabular}{| l | c | c | }
+     				\hline
+     				$p$ & $q$ & $p \wedge q$ \\ \hline
+     				0 & 0 & 0 \\ \hline
+     				0 & 1 & 0 \\ \hline
+     				1 & 0 & 0 \\ \hline
+     				1 & 1 & 1 \\ 
+     				\hline
+   				\end{tabular}
+   				\begin{tabular}{| l | c | c | }
+     				\hline
+     				$p$ & $q$ & $p \vee q$ \\ \hline
+     				0 & 0 & 0 \\ \hline
+     				0 & 1 & 1 \\ \hline
+     				1 & 0 & 1 \\ \hline
+     				1 & 1 & 1 \\ 
+     				\hline
+   				\end{tabular}
+   				\begin{tabular}{| l | c | c | }
+     				\hline
+     				$p$ & $q$ & $p \rightarrow q$ \\ \hline
+     				0 & 0 & 1 \\ \hline
+     				0 & 1 & 1 \\ \hline
+     				1 & 0 & 0 \\ \hline
+     				1 & 1 & 1 \\ 
+     				\hline
+   				\end{tabular}
+   				\begin{tabular}{| l | c | c | }
+     				\hline
+     				$p$ & $q$ & $p \leftrightarrow q$ \\ \hline
+     				0 & 0 & 1 \\ \hline
+     				0 & 1 & 0 \\ \hline
+     				1 & 0 & 0 \\ \hline
+     				1 & 1 & 1 \\ 
+     				\hline
+   				\end{tabular}
+ 			\end{center}
+		\end{itemize}
+		\item Semántica trivaluada
+		\begin{itemize}
+			\item 4 valores de verdad
+			\begin{itemize}
+				\item verdadero (1) ($true$)
+				\item falso (0) ($false$)
+				\item indefinido ($-$)
+			\end{itemize}
+			\item Interpretación
+			\begin{itemize}
+				\item $\neg \equiv$ "no" (negación)
+				\item $\wedge \equiv$ "y" (conjunción)
+				\item $\vee \equiv$ "o" (disyunción, no exclusivo)
+				\item $\rightarrow \equiv$ "si...entonces" (implicación)
+				\item $\leftrightarrow \equiv$ "si y solo si" (equivalencia,doble implicación) 
+			\end{itemize}
+			\item Secuencial: se lee de izquierda a derecha. La evaluación termina cuando se puede deducir el valor de verdad aunque lo otro esté indefinido
+			\item Tablas de verdad
+			\begin{center}
+				\begin{tabular}{| l | c | }
+     				\hline
+     				$p$ & $\neg p$  \\ \hline
+     				1 & 0  \\ \hline
+     				0 & 1  \\ \hline
+     				$-$ & $-$ \\
+     				\hline
+   				\end{tabular}
+   				\begin{tabular}{| l | c | c | }
+     				\hline
+     				$p$ & $q$ & $p \wedge q$ \\ \hline
+     				0 & 0 & 0 \\ \hline
+     				0 & 1 & 0 \\ \hline
+     				1 & 0 & 0 \\ \hline
+     				1 & 1 & 1 \\ \hline
+     				0 & $-$ & 0 \\ \hline
+     				1 & $-$ & $-$ \\ \hline
+     				$-$ & 0 & $-$ \\ \hline
+     				$-$ & 1 & $-$ \\ 
+     				\hline
+   				\end{tabular}
+   				\begin{tabular}{| l | c | c | }
+     				\hline
+     				$p$ & $q$ & $p \vee q$ \\ \hline
+     				0 & 0 & 0 \\ \hline
+     				0 & 1 & 1 \\ \hline
+     				1 & 0 & 1 \\ \hline
+     				1 & 1 & 1 \\ \hline
+     				0 & $-$ & $-$ \\ \hline
+     				1 & $-$ & 1 \\ \hline
+     				$-$ & 0 & $-$ \\ \hline
+     				$-$ & 1 & $-$ \\ 
+     				\hline
+   				\end{tabular}
+   				\begin{tabular}{| l | c | c | }
+     				\hline
+     				$p$ & $q$ & $p \rightarrow q$ \\ \hline
+     				0 & 0 & 1 \\ \hline
+     				0 & 1 & 1 \\ \hline
+     				1 & 0 & 0 \\ \hline
+     				1 & 1 & 1 \\ \hline
+     				0 & $-$ & 1 \\ \hline
+     				1 & $-$ & $-$ \\ \hline
+     				$-$ & 0 & $-$ \\ \hline
+     				$-$ & 1 & $-$ \\ 
+     				\hline
+   				\end{tabular}
+   				\begin{tabular}{| l | c | c | }
+     				\hline
+     				$p$ & $q$ & $p \leftrightarrow q$ \\ \hline
+     				0 & 0 & 1 \\ \hline
+     				0 & 1 & 0 \\ \hline
+     				1 & 0 & 0 \\ \hline
+     				1 & 1 & 1 \\ \hline
+     				0 & $-$ & $-$ \\ \hline
+     				1 & $-$ & $-$ \\ \hline
+     				$-$ & 0 & $-$ \\ \hline
+     				$-$ & 1 & $-$ \\ 
+     				\hline
+   				\end{tabular}
+ 			\end{center}
+ 			\item Tautología: Una fórmula es tautología si toma el valor 1 ($true$) para todos los posibles valores de sus variables proposicionales
+ 			\item Contradicción: Una fórmula es tautología si toma el valor 0 ($false$) para todos los posibles valores de sus variables proposicionales
+ 			\item Contingencia: Cuando no es ni tautología ni contradicción
+ 			\item Relación de fuerza: $A$ es más fuerte que $B$ cuando $A \rightarrow B$ es tautología (A fuerza a B o B es más débil que A)
+		\end{itemize}
+	\end{itemize}
+\subsection{Tipos de datos}
+	\begin{itemize}
+		\item Definición: Conjunto de valores con operaciones (Todos los tipos tienen $\perp$)
+		\item Tipo Int
+		\begin{itemize}
+			\item $\in \mathbb{Z}$
+			\item Constantes: $0;1;-1;2;-2;\dots$
+			\item Operaciones aritméticas
+			\begin{itemize}
+				\item $a + b$ (suma)
+				\item $a - b$ (resta)
+				\item $a * b$ (multiplicación)
+				\item $a \mbox{ div } b$ (división entera)
+				\item $a \mbox{ mod } b$ (resto)
+				\item $a^{b}$ o $pot(a,b)$ (potenciación)
+				\item $abs(a)$ (valor absoluto)
+			\end{itemize}
+			\item Comparaciones
+			\begin{itemize}
+				\item $a == b$ (igual)
+				\item $a \neq b$ (distinto)
+				\item $a < b$ (menor)
+				\item $a \leq b$ (menor o igual)
+				\item $a > b$ (mayor)
+				\item $a \geq b$ (mayor o igual)
+			\end{itemize}
+		\end{itemize}
+		\item Tipo Bool
+		\begin{itemize}
+			\item $\in \left\lbrace 0, 1 \right\rbrace$
+			\item Constantes: $true,false, \perp$
+			\item Operaciones aritméticas
+			\begin{itemize}
+				\item $no(a)$ ($\neg A =$ $no(A)$)
+				\item $a$ \&\& $b$ ($A \wedge B = A$ \&\& $B$)
+				\item $a \mid \mid b$ ($A \vee B = A \mid \mid B$)
+				\item $a$ $\rightarrow$ $b$ 
+				\item $a$ $\leftrightarrow$ $b$ 
+			\end{itemize}
+			\item Comparaciones
+			\begin{itemize}
+				\item $a == b$ (igual)
+				\item $a \neq b$ (distinto)
+			\end{itemize}
+		\end{itemize}
+		\item Tipo Float
+		\begin{itemize}
+			\item $\in \mathbb{R}$
+			\item Constantes: $0;1;-1;2;-2;\pi,e,\dots$
+			\item Operaciones
+			\begin{itemize}
+				\item $a + b$ (suma)
+				\item $a - b$ (resta)
+				\item $a \cdot b$ (multiplicación)
+				\item $a / b$ (división real)
+				\item $a^{b}$ o $pot(a,b)$ (potenciación)
+				\item $abs(a)$ (valor absoluto)
+				\item $\log_{b}(a)$ (logarítmo)
+				\item $sen(a),cos(a),tan(a),asen(a),\dots$
+			\end{itemize}
+			\item Comparaciones
+			\begin{itemize}
+				\item $a == b$ (igual)
+				\item $a \neq b$ (distinto)
+				\item $a < b$ (menor)
+				\item $a \leq b$ (menor o igual)
+				\item $a > b$ (mayor)
+				\item $a \geq b$ (mayor o igual)
+			\end{itemize}
+		\end{itemize}
+		\item Tipo Char
+		\begin{itemize}
+			\item $\in$ Alfabeto
+			\item Constantes: 'a',\dots,'z','A',\dots,'Z','0',\dots,'9','á',\dots,'ú'
+			\item Funciones
+			\begin{itemize}
+				\item $ord(a)$ (numera los caracteres)
+				\item $char(a)$ (de el número da el carácter)
+			\end{itemize}
+			\item Comparaciones
+			\begin{itemize}
+				\item $a == b$ ($ord(a) = ord(b)$)
+				\item $a \neq b$ ($ord(a) \neq ord(b)$)
+				\item $a < b$ ($ord(a) < ord(b)$)
+				\item $a \leq b$ ($ord(a) \leq ord(b)$)
+				\item $a > b$ ($ord(a) > ord(b)$)
+				\item $a \geq b$ ($ord(a) \geq ord(b)$)
+			\end{itemize}
+		\end{itemize}
+	\end{itemize}
+\subsection{Funciones auxiliares}
+	\begin{itemize}
+		\item Las funciones auxiliares son una expresión del lenguaje que hace reemplazos sintácticos
+		\item No se pueden usar problemas para resolver problemas pero si usar funciones auxiliares para resolverlo
+		\item Permiten modularizar el problema
+		\item Facilitan la lectura
+	\end{itemize}
+\subsection{Tipos compuestos}
+	\begin{itemize}
+		\item Cada valor de tipo básico representa un elemento atómico e indivisible
+		\begin{itemize}
+			\item Int
+			\item Float
+			\item Bool 
+			\item Char
+		\end{itemize}
+		\item Un valor de tipo compuesto puede contener información que puede ser dividida en componente de otro tipo
+		\item Los observadores son funciones que se aplican a valores del tipo compuesto y devuelve el valor de sus componentes
+		\item Los observadores definen al tipo compuesto (si todos los observadores de dos instancias del mismo tipo dan iguales entonces son iguales)
+		\item Los observadores pueden tener precondición (si vale la precondición el observador no se indefine)
+		\item A las condiciones o reestricciones que tenga el tipo son invariantes del tipo
+		\item Los problemas que reciben argumentos de un tipo compuesto automáticamente agregan a la precondición el invariante del tipo
+	\end{itemize}
+\section{Programación Funcional}
+\subsection{Introducción}
+	\begin{itemize}
+		\item Paradigma: Definición del modo en que se especifica el cómputo
+		\item Todo lenguaje pertenece a un paradigma
+		\item Paradigmas: 		
+		\begin{itemize}
+			\item Imperativo (C,Basic,Ada,Clu)
+			\item en Objetos (Smaltalk)
+			\item orientado a objetos (C++,C\#,Java)
+			\item funcional (Lisp,Gopher,Haskell)
+			\item lógica (Prolog)
+		\end{itemize}
+		\item Un programa en funcional es una colección en funciones que transforma datos de entrada en datos de salida
+		\item Una expresión es una tira de símbolos que denotan un valor
+		\item Hay expresiones
+		\begin{itemize}
+			\item Atómicas (formas normales) son las que representan un valor
+			\item Compuestas que son combinaciones de expresiones atómicas y operaciones
+		\end{itemize}
+		\item Un programa en lenguaje funcional es un conjunto de ecuaciones que definen funciones
+	\end{itemize}
+\subsection{Recursividad}
+	\begin{itemize}
+		\item Una función recursiva consta de 
+		\begin{itemize}
+			\item Un caso base (para poder terminar)
+			\item Una llamada recursiva (que se acerque al caso base)
+		\end{itemize}
+		\item Las funciones recursivas vendrían a reemplazar los ciclos en lenguajes imperativos
+		\item Para definir funciones recursivas se usan ecuaciones orientadas donde
+		\begin{itemize}
+			\item El lado izquierdo es la expresión a definir
+			\item El lado derecho es la definición
+		\end{itemize}
+		\item Para el cálculo de un valor de una expresión que haga una llamada a una función se hace el reemplazo sintáctico de lo de la izquierda por lo de la derecha
+	\end{itemize}
+\subsection{Características de Haskell}
+	\begin{itemize}
+		\item Transparencia referencial: Propiedad del lenguaje que garantiza que el valor de una expresión depende exclusivamente de sus subexpresiones
+		\item Cada expresión es unívoca, representa siempre el mismo valor, a diferencia de otros paradigmas en que el significado de una expresión depende del contexto
+		\item Reducción: Proceso para reemplazar una subexpresión por su definición, donde la expresión tiene reducida está más cerca de una forma normal (aunque puede ser más larga que la original)
+		\item Todo valor es un tipo de dato (inclusive funciones)
+		\item Toda expresión bien formada representa un valor
+		\item Fuertemente tipado: Todos los tipos son explicitos, no se le puede pasar a una función un tipo de dato que no espera)
+		\item Estáticamente tipado: Se definen todos los tipos antes de correr el programa y no pueden cambiar su tipo
+		\item Polifórmico: La función puede definirse sobre un tipo genérico (cualquier tipo)
+		\item Currificado: Evita el uso de signos de puntuación tales como comas y paréntesis  
+	\end{itemize}
+\subsection{Tipos de datos}
+    \begin{itemize}
+		\item Tipos de datos abstractos
+	    	\begin{itemize}
+			\item No se conoce como se representan los valores de de un tipo de dato (Su representación está encapsulada y oculta)
+			\item Solo se conocen sus operaciones
+			\item Ejemplo: Int, Float
+	    	\end{itemize}
+		\item Tipos de datos algebraicos
+	    	\begin{itemize}
+			\item Se conoce la forma de cada elemento
+			\item Para crear un tipo algebraico se escribe la forma que tiene cada elemento
+			\item La clausula de la definición consta de
+			\begin{itemize}
+		   		\item La palabra data
+		    		\item Constructores
+		    		\begin{itemize}
+					\item Nombre de la constante
+					\item Argumentos:  No tienen reglas de inferencia y forman expresiones atómicas
+		    		\end{itemize}
+		    		\item Ejemplo
+		    		\begin{itemize}
+		    			\item $data$ Bool = $True$ $|$ $False$
+		    			\item $data$ Figura = Circ $Float$ $|$ Rect $Float$ $Floati$
+				\end{itemize}	
+		    	\end{itemize}
+			\item Pattern matching
+		    	\begin{itemize}
+				\item Es el mecanismo para ver como está construido un elemento de tipo algebraico
+				\item Patterns: Expresiones del lenguaje tomadas solamente por constructores y variables que no se repiten
+				\item Matching: Decide si la expresión coincide por su forma con el patrón (si existe). Entonces liga las variables del patrón a las subexpresiones correspondientes
+			\end{itemize}
+			\item Tipos algebráicos recursivos: Son tipos algebraicos que toman como argumento de algún constructor un tipo del mismo que se está definiendo. Ej: $data$ Nat = Z $|$ S $Nat$
+			\item Recursión estructural: Es lo que permite definir funciones (usando \textit{pattern matching}). Se hace recursión sobre las estructuras de los datos.
+			\item Sinónimo de tipos: Aliasing de tipos
+		\end{itemize}
+	\end{itemize}
+\subsection{Inducción estructural}
+    \begin{itemize}
+	\item Orden bien fundado
+	\begin{itemize}
+	    \item Solo se puede aplicar inducción sobre un orden bien fundado
+	    \item Orden parcial
+	    \begin{itemize}
+		\item Antisimétrico
+		\item Reflexivo
+		\item Transitivo
+	    \end{itemize}
+	    \item Orden total
+	    \begin{itemize}
+		\item Todo los elementos son comparables ($\forall a,b \in A, a \guilsinglleft b$ o $b \guilsinglleft a$)
+	    \end{itemize}
+	    \item Orden bien fundado
+	    \begin{itemize}
+		\item $\guilsinglleft$ es un orden bien fundado sobre A si $\guilsinglleft$ es un orden total y cada subconjunto no vacío tiene un mínimo
+	    \end{itemize}
+	\end{itemize}
+	\item Inducción estructural: Sea $P(X)$ una prop de un elemento de un tipo algebráico T. Queremos probar que vale $P(X) \; \forall X:T$ 
+	\begin{itemize}
+	    \item Axioma de inducción: Sea $c:T \longrightarrow \mathbb{N}$. Si 
+	    \begin{itemize}
+		\item $P(y) \; \forall y:T$ tq $c(y)=0$
+		\item $(c(y) = n \Rightarrow P(y)) \; \forall y:T \Rightarrow (c(y) = n+1 \Rightarrow P(y)) \; \forall y:T$
+	    \end{itemize}
+	    \item Entonces $P(y) \; \forall y:T$
+	    \item Axioma de inducción completa:
+	    \begin{itemize}
+	   	\item $P(y) \; \forall y:T$ tq $c(y)=0$
+		\item $\forall y:T \; (c(y) \leq n \Rightarrow P(y)) \; \Rightarrow \; \forall y:T (c(y)=n+1 \Rightarrow P(y))$
+	    \end{itemize}
+	\end{itemize}
+	\item Función variante
+	\begin{itemize}
+	   \item Definición: $f$::$T_1 \longrightarrow \dots \longrightarrow T_n$ función.Se le llama función variante de $f$ a una función $F_{V_f} : T_1 \times \dots \times T_{n-1} \longrightarrow \mathbb{Z}$ estrictamente decreciente en las llamadas. Es decir para cada ecuación $f: \overline{x} = \dots f \overline{y_1} \dots f \overline{y_m}$ se cumple $$F_{V_f}(\overline{x}) > F_{V_f}(\overline{y_i}) \mbox{ para cada } i:1 \dots n$$
+	   \item Teorema (Condición suficiente de terminación): Sea $f$::$T_1 \longrightarrow \dots \longrightarrow T_n$ y $F_{V_f} : T_1 \times \dots \times T_n \longrightarrow \mathbb{Z}$ una función variante de f
+	   	\subitem Si $F_{V_f}(\overline{x}) \leq 0 \Rightarrow$ $f$ se define mediante una ecuación de caso base.
+		Entonces $f$ termina, para cada $\overline{x}$ en $T_1 \times \dots \times T_{n-1}$
+	    \item Corolario: $\forall \overline{x} \; T_1 \times \dots \times T_{n-1}$, $f \overline{x}$ termina en a lo sumo $F_{V_f}(\overline{x})$ llamadas recursivas
+	\end{itemize}
+    \end{itemize}
+\subsection{Reducción}
+    \begin{itemize}
+	\item Modelo de computo: Especifación que define como se calcula el valor de una expresión
+	\item Reducción:
+	\begin{itemize}
+	    \item Lado izquierdo: redex (Reducible expression) o radical
+	    \item Lado derecho: subexpresión reemplazante
+	\end{itemize}
+	\item Las expresiones se reducen hasta llegar una forma normal
+	\item Formas normales: Constantes y constructores
+	\item Mecanismo de reducción: 
+	\begin{itemize}
+	    \item Si la expresión está en una forma normal, ya está
+	    \item Si no busca un redex
+	    \item Reemplaza el redex y vuelve a empezar
+	\end{itemize}
+	\item Las expresiones que no terminan en una forma normal se llama normal se llaman indefinidas (Se representan con $\perp$,bottom, si se evalua bottom se indefine)
+	\item Funciones
+	\begin{itemize}
+	    \item parcial: $f x$ puede devolver $\perp$
+	    \item total: $f x$ puede devolver $\perp$
+	    \item estricta: $f \perp \leadsto \perp$
+	    \item no estricta $f \perp \leadsto$ valor
+	\end{itemize}
+	\item Ordenes:
+	\begin{itemize}
+	    \item Aplicativo
+	    \begin{itemize}
+		\item Primero redex internos
+		\item Primero argumentos, después la aplicación
+		\item Todas las funciones son estrictas
+	    \end{itemize}
+	    \item Normal
+	    \begin{itemize}
+		\item El redex más externo para hacer pattern matching
+		\item Primero la aplicación, después los argumentos (si se necesitan)
+		\item Hay estrictas y no estrictas, depende si necesiten evaluar todos sus argumentos
+	    \end{itemize}
+	    \item Ambos leen de izquierda a derecha
+	    \item El orden normal siempre encuentra la forma normal
+	\end{itemize}
+	\item Evaluación lazy: es el orden de evaluación de haskell, es normal, pero aprovechando la transparencia referencial
+	\item Alto orden
+	\begin{itemize}
+	    \item Las funciones de alto orden son aquellas que reciben o devuelven funciones
+	    \item Iteran una función arbitraria sobre una estructura de datos, en un cierto orden
+	    \item Construyen un valor de retorno
+	    \item Ejemplos:
+	    \begin{itemize}
+		\item map: Aplica la función que le pasas como argumento de entrada a cada unos de los elementos de la listá pasada por argumento
+		\item fiter: Filtra los elementos de la lista pasada por argumento, con los elementos que cumplen con una condición, dada por la función pasada como parámetro de entrada
+		\item fold: Reducen la lista pasada como argumento a un solo valor usando la función pasada como parámetro de entrada
+	    \end{itemize} 
+	\end{itemize}
+    \end{itemize}
+\section{Imperativo}
+\subsection{Introducción}
+    \begin{itemize}
+    	\item Modelo de cómputo: Un programa consta de instrucciones que especifican como operar con los datos, que están alojados en memoria
+	\item Variables:
+	\begin{itemize}
+	    \item Corresponden a posiciones de memoria RAM
+	    \item Se mantienen a lo largo del programa mientras no se cambie explícitamente su valor
+	    \item Por todo esto se pierde la transparencia referencial
+	    \item Toda variable tiene un tipo asociado y se declaran dando su tipo y su nombre
+	\end{itemize} 
+	\item Operaciones fundamentales:
+	\begin{itemize}
+	    \item Asignación: modifica el valor de una variable evaluando la expresión de la derecha y se obtiene un valor. El valor obtenido se copia en la memoria (dondé está la variable).El resto de la memoria no cambia.\textbf{Sintaxis}: (a = b;)
+	    \item Control de flujo: 
+	    \begin{itemize}
+		\item Return: Termina la ejecución de una función, retornando el control a su invocación y devolviendo el valor de la expresión como resultado.\textbf{Sintaxis}: return $a$;
+		\item Condicional: Es una operación que dada una condición especifica que bloque de instrucciones ejecuta el programa si se cumple la condición y que bloque si nó.\textbf{Sintaxis}: if(B) uno else dos
+		\subitem donde B es la condición (booleana), uno y dos los bloques que se ejecutan si se cumple B o no respectivamente.
+		\item Ciclos: Es una operación que dada una condición ejecuta un bloque de instrucciones tantas veces (0 o más veces) mientras se cumpla la condición. \textbf{Sintaxis}: while(B) cuerpo
+		\subitem donde B es la condición booleana sin efectos colaterales
+	    \end{itemize}
+	\end{itemize}
+	\item Funciones
+	\begin{itemize}
+	    \item Las funciones pueden devolver más de un valor
+	    \item Hay dos formas de pasar argumentos (referencia y copia)
+	    \item Las funciones no son valores y no hay mecanismos para realizar operaciones entre funciones
+	    \item Los argumentos de entrada de una función se comportan como variables
+	    \subitem Los valores se toman cuando se invoca a la función
+	    \subitem Se puede modificar los argumentos de entrada y el valor modificado no guarda relación con las variables de quien real
+	\end{itemize}
+	\item Programa en C++: Colección de definiciones de tipos y funciones
+	\item Semántica de la programación imperativa
+	\begin{itemize}
+	    \item Conjunto de variables con los datos del problema
+	    \item Se ejecuta una serie de instrucciones que van cambiando los valores de las variables
+	    \item Cuando el programa termina los valores finales de las variables deberían tener la respuesta
+	\end{itemize}
+	\item Pasajes de argumentos a la función
+	\begin{itemize}
+	    \item Por copia: Coloca en la posición de memoria del argumento el valor de una expresión usada en la invocación.
+	    \item Por referencia: 
+	    \begin{itemize}
+		\item La función recibe una posición de memoria donde encontrar el argumento
+		\item La función puede leer y escribir el valor de la memoria 
+	    \end{itemize}
+	\end{itemize}
+	\item Referencias: Hace referencia a una variable (actúa como aliasing de variables)
+    \end{itemize}
+\subsection{Demostraciones de correctitud}
+    \begin{itemize}
+    	\item Transformaciones de Estados
+	\begin{itemize}
+	    \item Se llama transformación de estado a los valores de todas sus variables en un punto de ejecución
+	    \item Un programa es una sucesión de estados
+	    \item Se agregan a la especificación
+	    \begin{itemize}
+		\item vale $P$
+		\item vale etiqueta: $P$
+		\item estado nombre (De un nombre a un punto del programa)
+		\item pre($nombre\_variable$) (Se pone dentro de las funciones para indicar el valor de los argumentos de la función)
+		\item local($nombre\_variable$) si el programa modifica los argumentos de entrada de esa variable
+		\item implica: son afirmaciones (del estado de un programa) que se desprenden de las afirmaciones anteriores
+	    \end{itemize}
+	\end{itemize}
+	\item Demostración if
+	\begin{itemize}
+	    \item \textbf{if}($B$) \textbf{then} uno \textbf{else} dos
+	    \item Componentes:
+	    \begin{itemize}
+		\item Guarda (B)
+		\item Precondición ($P_{if}$)
+		\item Poscondición ($Q_{if}$)
+	    \end{itemize}
+	    \item Hay que mostrar que si se cumple la precondición del if, se cumple la precondición valga la guarda o no ($P_{if} \Rightarrow Q_{if})$
+	\end{itemize}	
+	\item Demostración while
+	\begin{itemize}
+	    \item 
+	    \textbf{while} ($B$) \{ \\
+	    	//E1 \\
+	    	cuerpo \\
+	    	//E2 \\
+	    \}
+	    \item Componentes
+	    \begin{itemize}
+	    	\item Guarda (B)
+		\item Precondición ($P_c$)
+		\item Poscondición ($Q_c$)
+		\item Invariante ($I$)
+		\item Función variante ($V$)
+		\item Cota ($c$)
+	    \end{itemize}
+	    \item Teorema del invariante: Sea un ciclo (como el de arriba, con estados E1,E2), si vale
+	    \begin{itemize}
+		\item $P_c \Rightarrow I$
+		\item $(I \wedge \neg B) \Rightarrow Q_c$
+		\item el invariante se preserva durante la ejecución del cuerpo
+		\item $V$ es decreciente
+		\item $(I \wedge V \leq c) \Rightarrow \neg B$
+	    \end{itemize}
+	    \subitem entonces para cualquier valor de las variables del programa que haga verdadera $P_c$, el ciclo termina y hace verdadera $Q_c$, es decir el ciclo es correcto respecto de su especificación
+	\end{itemize}
+    \end{itemize}
+\end{document}
