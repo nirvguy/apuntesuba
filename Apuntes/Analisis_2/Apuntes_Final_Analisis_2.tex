@@ -1,0 +1,195 @@
+
+% Copyright (c) 2013-02-15 Sosa Juan Cruz
+%  Permission is granted to copy, distribute and/or modify this document
+%   under the terms of the GNU Free Documentation License, Version 1.3
+%   or any later version published by the Free Software Foundation;
+%   with no Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts.
+%   A copy of the license is included in the section entitled "GNU
+%    Free Documentation License". 
+\documentclass[a4paper,10pt]{article}
+\textheight=25cm %Establece el largo del texto en cada página. El default es 19 cm. 
+\textwidth=18cm %Establece el ancho del texto en cada página (en este caso, de 17 cm). El default es 14 cm. 
+\topmargin=-1cm %Establece el margen superior. El default es de 3 cm, en este caso la instrucción sube el margen 1 cm hacia arriba. 
+\oddsidemargin=-10mm %Establece el margen izquierdo de la hoja. El default es de 4.5 cm; sin embargo, con sólo poner esta instrucción el margen queda en 2.5 cm. Si el parámetro es positivo se aumenta este margen y si es negativo disminuye. 
+\parindent=0mm %elimina la sangría. 
+\usepackage[utf8x]{inputenc} % Paquete de idioma que incluye escritura latina
+\usepackage{amssymb}        % Paquete para símbolos matemáticos
+\usepackage{amsmath}
+\usepackage{graphicx}       % Paquete para insertar imágenes
+\usepackage[colorlinks=true,linkcolor=black,urlcolor=black]{hyperref} 
+\usepackage{bookmark}       % Índice por Secciones en el PDF
+\usepackage[spanish,es-nolists]{babel}
+\title{ Apuntes para el final de Análisis II }
+%\setcounter{secnumdepth}{3}
+\author{Juan Cruz Sosa}
+\date{23 de Mayo de 2013}
+%%%%%%%%%%%%%%%% ESTO HACE QUE NO APAREZCA LA NUMERACIÓN EN LAS SECCIONES SALVO EN EL ÍNDICE %%%%%%%%%%%%%%%%%%%%%%
+%\makeatletter													 %%
+%\renewcommand\@seccntformat[1]{}										 %%
+%\makeatother												         %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{../macros/matematica}
+%%%%%%%%%%%%% ESTO HACE QUE SE IMPRIMAN LAS DEMOSTRACIONES
+\versionlargatrue
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\maketitle
+\tableofcontents 
+\clearpage
+
+\section{Teoremas de Funciones de $\mathbb{R} \longrightarrow \mathbb{R}$}
+\lema Sea f una función continua en $[a,b]$ y sea $c\in[a,b]$ tal que $f(c)>0$. \\ Luego $\exists \delta > 0$ tal que $f(x)>0 \ \  \forall x \in (-\delta+c,\delta+c)$
+\begin{demo}
+Como $f$ es continua en $[a,b]$ entonces $\displaystyle\lim_{x \rightarrow c} f(x) = f(c)$. \\
+Es decir $\forall \varepsilon > 0, \ \ \exists \delta > 0$ tq si $\abs{x-c}<d \implies \abs{f(x)-f(c)} < \varepsilon$ \\
+$\abs{f(x)-f(c)} < \varepsilon \Leftrightarrow -\varepsilon + f(c) < f(x) < \varepsilon + f(c)$.\\
+Elijo $0 < \varepsilon < \frac{f(c)}{2}$. Luego me queda $f(x) > -\varepsilon + f(c) > \frac{f(c)}{2} > 0$.Con $\abs{x-c} < \delta \Leftrightarrow -\delta + c < x < \delta + c$. 
+\end{demo}
+\corolario Sea f una función continua en $[a,b]$ y sea $c\in[a,b]$ tal que $f(c)<0$. \\ Luego $\exists \delta > 0$ tal que $f(x)<0 \ \  \forall x \in (-\delta+c,\delta+c)$
+\\
+\teoremaDe{Bolzano o (Teorema del valor intermedio)} Sea $f:[a,b] \rightarrow \mathbb{R}$ continua con $f(a)$ y $f(b)$ de signos distintos entonces $\exists c \in (a,c)$ tq $f(c)=0$
+\begin{demo}
+Sin pérdida de generalidad supongamos $f(a)>0$ y $f(b)<0$.\\
+Consideremos $S=\lbrace x\in[a,b] \mbox{ tq } f(x) > 0 \rbrace \neq \emptyset$ (pues $f(a) > 0$). Como $S$ es cerrado y acotado, S tiene supremo, llamémoslo $s=sup\lbrace S\rbrace$. \\
+Queremos ver que $a < s < b$ y $f(s) = 0$.\\
+Por un lado tenemos que $f(a)>0$ entonces por el lema anterior $\exists \delta > 0$ tal que $f(x)>0 \ \ \forall x \in [a,a+\delta)$. ($x \in S$ y s es cota superior) $s > a - \delta > a$. \\
+Y por otro lado tenemos que $f(a)<0$ entonces $\exists \delta > 0$ tal que $f(x)<0 \ \ \forall x \in (b-\delta,b]$. Entonces $s < b - \delta < b$ \\
+Nos falta ver que $f(s)=0$. \\
+Si $f(s)>0$ luego $\exists \delta > 0$ tq $\forall x \in (-\delta+s,s+\delta)$ se tiene que $f(x) > 0$. Nos queda que $(-\delta+s,s+\delta) \in S$ pero entonces $s$ no sería cota superior (pues $s+\delta>s$).\\
+Si $f(s)<0$ de nuevo $\exists \delta > 0$ tq $\forall x \in (-\delta+s,s+\delta)$ se tiene que $f(x) < 0$. Pero $(s-\delta,s+\delta) \not \subset A$ 
+\end{demo}
+\teoremaDe{Fermat}: si $f$ es derivable en $x_0$, $x_0$ es un extremo relativo de $f$ entonces $f'(x_0)=0$. \\
+\begin{demo}
+Supongamos que $x_0$ es máximo, entonces
+$\displaystyle
+\left.
+\begin{array}{c}
+\displaystyle f'(x_0) = \lim_{h \rightarrow 0+} \frac{f(x_0+h)-f(x_0)}{h} \geq 0 \\
+\displaystyle f'(x_0) = \lim_{h \rightarrow 0-} \frac{f(x_0+h)-f(x_0)}{h} \leq 0
+\end{array}
+\right\rbrace \Rightarrow f'(x_0) = 0$
+\end{demo}
+\teoremaDe{Rolle} $f:[a,b] \rightarrow \mathbb{R}$ continua y derivable en $(a,b)$ con $f(a) = f(b)$. Entonces $\exists c \in (a,b)$ tal que $f'(c)=0$
+\begin{demo}
+Tomamos \\
+$x_0 \in [a,b]$ tal que $f(x_0) \geq f(x) \forall x \in [a,b]$ y \\
+$x_1 \in [a,b]$ tal que $f(x_1) \leq f(x) \forall x \in (a,b)$ que siempre se puede pues $f$ es continua, entonces alcanza su máximo y mínimo allí. \\
+\begin{itemize}
+	\item si $x_0 \in (a,b)$ entonces por el teorema de Fermat $\exists c \in (a,b)$ tal que $f'(c)=0$.\\
+	\item si $x_0 \in \left\{a,b\right\}$ \\
+	\begin{itemize} 
+		\item si $x_1 \in (a,b)$ de nuevo por teo. de Fermat $\exists c \in (a,b)$ tal que $f'(c)=0$. \\
+		\item si $x_1 \in \left\{a,b\right\}$ entonces $\max{f}=\min{f}$, es decir $f$ es constante luego $f'(x)=0 \forall x \in (a,b)$
+	\end{itemize}
+\end{itemize}
+\end{demo}
+\teoremaDe{Lagrange o Teorema del valor medio} Sea $f:[a,b] \rightarrow \mathbb{R}$ continua y derivable en $(a,b)$ entonces $\exists c \in (a,b)$ tal que $f(b)-f(a) = f'(c)(b-a)$
+\begin{demo}
+Sea $l:[a,b] \rightarrow \mathbb{R}$ la recta secante que interseca $f(a)$ con $f(b)$ es decir $l(x)=\frac{f(b)-f(a)}{b-a}(x-a)+f(a)$, y además sabemos que $l'(x)=\frac{f(b)-f(a)}{b-a}$ \\
+y sea $g:[a,b] \rightarrow \mathbb{R}$ definida como $g(x)=f(x)-l(x)$, y además también sabemos que $g$ es continua y derivable en $(a,b)$ (por ser resta de continuas y derivables resp.). \\
+$g(a)=f(a)-l(a)=0=f(b)-l(b)=g(b)$. Luego por el teorema de Rolle $\exists c \in (a,b)$ tal que $g'(c)=0$, es decir $0 = f'(c)-l'(c) = f'(c) - \frac{f(b)-f(a)}{b-a} \Leftrightarrow f(b) - f(a) = f'(c) (b-a)$
+\end{demo}
+\teoremaDe{Cauchy} $f,g:[a,b] \rightarrow \mathbb{R}$ continuas y derivables en $(a,b)$ tal que $g(a) \neq g(b)$. Entonces $\exists c \in (a,b)$ que cumple $\frac{f(a)-f(b)}{g(a)-g(b)} = \frac{f'(c)}{g'(c)}$
+\begin{demo}
+Si se toma $l(x) = \frac{f(b)-f(a)}{g(b)-g(a)}(g(x)-g(a)) + f(a)$. La demo es análoga a la anterior
+\end{demo}
+\clearpage
+\section{Extensión de Teoremas de $\mathbb{R}$ en $\mathbb{R}$}
+\teoremaDe{valores intermedios en conjuntos arconexos de $\rene$} Sean $A \subset \rene$ arconexos, $f:A \rightarrow \mathbb{R}$. Si $f(P) < d < f(Q)$ con $P,Q \in A$ y $d \in \mathbb{R}$, entonces $\exists R \in A$ tal que $f(R)=d$
+\begin{demo}
+Tomemos $\alpha: [0,1] \rightarrow \rene$ continua tal que $\alpha(0) = Q$ y $\alpha(1) = P$. Por ejemplo $\alpha(t) = t(P-Q)+Q$ (que siempre se puede por ser A arcoconexo). \\
+y consideremos $g: [0,1] \rightarrow \mathbb{R}$ con $g(t) = (f \circ \alpha)(t)-d$. \\
+$g$ es continua por ser composición de continuas y además $g(0) = f(Q)-d > 0$ y $g(1) = f(P)-d < 0$.\\
+Luego por Bolzano $\exists c \in [0,1]$ tal que $g(c)=0$ es decir $f(\alpha(c))-d=0 \Leftrightarrow d = f(\alpha(c))$ con $\alpha(c) \in A$.
+\end{demo}
+\clearpage
+\section{Diferenciabilidad}
+\propiedad Sea $f : A \subseteq \rene \rightarrow R$ diferenciable en $P \in A$. Entonces $f$ continua en $P$.
+\begin{demo}
+$\displaystyle\lim_{X \rightarrow P} f(X) = \lim_{X \rightarrow P} {f(X)-f(P)-\nabla f(P)(X-P) + \nabla f(P)(X-P) + f(P)}\\ 
+= \lim_{X \rightarrow P} {\frac{f(X)-f(P)-\nabla f(P)(X-P)}{\norm{X-P}}{\norm{X-P}} + f(P) + \nabla f(P)(X-P)}\\ 
+= \lim_{X \rightarrow P} \frac{f(X)-f(P)-\nabla f(P)(X-P)}{\norm{X-P}} \lim_{X \rightarrow P} {\norm{X-P}} + \lim_{X \rightarrow P} \nabla f(P) \lim_{X \rightarrow P} (X-P) + \lim_{X \rightarrow P} f(P)$. \\ 
+Como f es diferenciable en $P$ $\displaystyle\lim_{X \rightarrow P} \frac{f(X)-f(P)-\nabla f(P)(X-P)}{\norm{X-P}} = 0$  por definición. \\ 
+Luego \\$\displaystyle\lim_{X \rightarrow P} \frac{f(X)-f(P)-\nabla f(P)(X-P)}{\norm{X-P}} \lim_{X \rightarrow P} {\norm{X-P}} + \lim_{X \rightarrow P} \nabla f(P) \lim_{X \rightarrow P} (X-P) + \lim_{X \rightarrow P} f(P) \\= 0 + 0 + f(P)$.
+\end{demo}
+\propiedad Sea $f:U \subseteq \rene{2}$ continua en U con derivadas parciales continuas en el abierto $U$. Entonces $f$ diferenciable en $U$.
+\begin{demo}
+Sea $P=(x_0,y_0) \in U$.\\
+Quiero probar que $\displaystyle\lim_{(x,y) \rightarrow (x_0,y_o)} \frac{f(x,y)-f(x_0,y_0)-\frac{\partial f(x_0,y_0)}{\partial x}(x-x_0)-\frac{\partial f(x_0,y_0)}{\partial y}(y-y_0)}{\norm{(x-x_0,y-y_0)}}$ = 0 \\ 
+Es decir $\forall \varepsilon > 0$, $\exists \delta > 0$ tal que si $\displaystyle 0 < \norm{(x-x_0,y-y_0)} < \delta$ \\
+entonces $\frac{\abs{f(x,y)-f(x_0,y_0)-\frac{\partial f(x_0,y_0)}{\partial x}(x-x_0)-\frac{\partial f(x_0,y_0)}{\partial y}(y-y_0)}}{\norm{(x-x_0,y-y_0)}}<\varepsilon$. \\
+Como $f$ es continua y existen sus derivadas parciales entonces $\exists c_x \in (x,x_0)$ y $c_y \in (y,y_0)$ (por Teorema del valor medio) tal que \\
+$\left\lbrace
+\begin{array}{c c}
+f(x,y) - f(x_0,y) & =  \frac{\partial f(c_x,y)}{\partial x} (x-x_0) \\
+f(x_0,y) - f(x_0,y_0) & = \frac{\partial f(x_0,c_y)}{\partial y} (y - y_0)
+\end{array}
+\right$ \\
+Luego $\displaystyle f(x,y)-f(x_0,y_0)-\frac{\partial f(x_0,y_0)}{\partial x}(x-x_0)-\frac{\partial f(x_0,y_0)}{\partial y}(y-y_0) \\= 
+f(x,y)-f(x,y_0)+f(x,y_0)+f(x_0,y_0)-\frac{\partial f(x_0,y_0)}{\partial x}(x-x_0)-\frac{\partial f(x_0,y_0)}{\partial y}(y-y_0) \\=
+\frac{\partial f(c_x,y)}{\partial x} (x-x_0) + \frac{\partial f(x_0,c_y)}{\partial y} (y - y_0) - \frac{\partial f(x_0,y_0)}{\partial x}(x-x_0)-\frac{\partial f(x_0,y_0)}{\partial y}(y-y_0) \\=
+\left( {\frac{\partial f(c_x,y)}{\partial x} - \frac{\partial f(x_0,y_0)}{\partial x}} \right) (x-x_0) + \left(\frac{\partial f(x_0,c_y)}{\partial y} - \frac{\partial f(x_0,y_0)}{\partial y}\right) (y-y_0)$. \\ 
+\\ Entonces \\ \\
+$\displaystyle \vspace{1em} \frac{\abs{f(x,y)-f(x_0,y_0)-\frac{\partial f(x_0,y_0)}{\partial x}(x-x_0)-\frac{\partial f(x_0,y_0)}{\partial y}(y-y_0)}}{\norm{(x-x_0,y-y_0)}} \leq \\
+\vspace{1em} \left\lvert \frac{\partial f(c_x,y)}{\partial x} - \frac{\partial f(x_0,y_0)}{\partial x} \right\rvert \frac{\abs{x-x_0}}{\norm{(x-x_0,y-y_0)}} + \left\lvert \frac{\partial f(x_0,c_y)}{\partial y} - \frac{\partial f(x_0,y_0)}{\partial y} \right\rvert \frac{\abs{y-y_0}}{\norm{(x-x_0,y-y_0)}} \leq \\
+\underbrace{\left\lvert \frac{\partial f(c_x,y)}{\partial x} - \frac{\partial f(x_0,y_0)}{\partial x} \right\rvert}_{\rightarrow 0 (\frac{\partial f}{\partial x} \mbox{ continua })} + \underbrace{\left\lvert \frac{\partial f(x_0,c_y)}{\partial y} - \frac{\partial f(x_0,y_0)}{\partial y} \right\rvert}_{\rightarrow 0 (\frac{\partial f}{\partial y} \mbox{ continua })}$
+\end{demo}
+\propiedad Sea $f:\rene \rightarrow \mathbb{R}$ diferenciable en $P \in \rene$ y $V \in \rene$ con $\norm{v} = 1$. Entonces $\exists \frac{\partial f(P)}{\partial V}$ y es igual a $\nabla f(P) \cdot V$
+\begin{demo}
+Tomemos $g:\rene \rightarrow \mathbb{R}$,  $g(X) = \frac{f(X)-f(P)-\nabla f(P) \cdot (X-P)}{\norm{X-P}}$. Sabemos que $\displaystyle \lim_{X \rightarrow P} g(X) = 0$, porque $f$ es diferenciable en $P$, \\
+y tomemos también $\alpha:[0,1] \rightarrow \rene$, $\displaystyle\alpha(t) = tV+P$. Vemos que $\displaystyle\lim_{t \rightarrow 0} \alpha(t) = P$. \\
+Entonces existe el límite de la composición $\displaystyle\lim_{t \rightarrow 0} (f \circ \alpha)(t) = \lim_{t \rightarrow 0} \frac{f(P + tV) - f(P) - \nabla f(P) \cdot (tV-P+P)}{\norm{tV+P-P}} = \\
+\lim_{t \rightarrow 0} \frac{f(P+tV)-f(P)-t\nabla f(P) \cdot V}{\abs{t} \cdot \norm{V}} = \lim_{t \rightarrow 0} \frac{f(P+tV)-f(P)}{t} - \nabla f(P) \cdot v = 0 \Leftrightarrow \\ 
+\frac{\partial{f(P)}}{\partial V} = \lim_{t \rightarrow 0} \frac{f(P+tV)-f(P)}{t} = \nabla f(P) \cdot v$ 
+\end{demo}
+\propiedad Sea $f:\rene \rightarrow \mathbb{R}}$ diferenciable en $P \in \rene$ tal que $\nabla f(P) \neq 0$. Entonces $\nabla f(P)$ es la dirección de máximo crecimiento.
+\begin{demo}
+Sea $v \in \rene$ con $\norm{v}=1$. $\frac{\partial f}{\partial v} = \nabla f(P) \cdot v = \norm{\nabla f} \norm{v} \cos(\theta) = \norm{\nabla f} \cos (\theta)$ que es máximo cuando $v$ tiene la misma dirección que $\nabla f(P)$. \\
+Es decir $\nabla f(P) \cdot v = \norm{\nabla f(P)} \cos(\theta) \leq \norm{f(P)}$. \\
+Entonces $\nabla f(P) \cdot v = \norm{\nabla f(P)} \Leftrightarrow \nabla f(P) \cdot v \cdot v = \nabla f(P) \cdot \norm{v}^2= \norm{\nabla f(P)} \cdot v \Leftrightarrow \frac{\nabla f(P)}{\norm{\nabla f(P)}} = v$
+\end{demo}
+\teoremaDe{Valor medio para funciones diferenciables} Sea $B \subset \rene$ abierto y $f:B \rightarrow \matbb{R}$ diferenciable en $\rene$. 
+Entonces $\forall P,Q \in B$ se tiene que $\exists R$ en el segmento que une $P$ con $Q$ tal que $f(P)-f(Q)=\nabla f(P) (P-Q)$
+\begin{demo}
+Sean $\alpha : [0,1] \rightarrow \rene$, definida por $\alpha(t) = t(P-Q)+Q$ (continua en $[0,1]$ tdiferenciable en $(0,1)$) recta que une $P$ con $Q$ y \\
+$g: [0,1] \rightarrow \mathbb{R}$ definida por $g(t) = f(\alpha(t))$. Entonces $g$ es continua en $[0,1]$ por composición de continuas y $g$ además derivable puesto que $f$ diferenciable en $B$ y $\alpha$ derivable en $(0,1)$
+por regla de la cadena (con $g'(x) = \nabla f(\alpha(x))(P-Q) \forall x \in (0,1)$). 
+Luego por Fermat en una variable $\exists c \in [0,1]$ tal que $g(1)-g(0)=g'(c)(b-a) \Leftrightarrow f(P)-f(Q)=\nabla f(\underbrace{\alpha(c)}_{R})(P-Q)$
+\end{demo}
+\propiedad Sea $f : \rene[2] \rightarrow \mathbb{R}$ diferenciable en $P \in \rene[2]$ y $P$ un extremo de $f$. Entonces $\nabla f(P) = 0$.
+\begin{demo}
+$P = (x_0,y_0)$. Quiero probar que cada derivada se anula en P. \\
+Defino 
+$
+\left\lbrace
+\begin{array}{c c c}
+f_1 : \mathbb{R} \rightarrow \mathbb{R} \mbox{ como } & f_1(x) = f(x,y_0) & f_1'(x_0) = \frac{\partial f(x_0,y_0)}{\partial x} \\
+f_2 : \mathbb{R} \rightarrow \mathbb{R} \mbox{ como } & f_2(y) = f(x_0,y) & f_2'(y_0) = \frac{\partial f(x_0,y_0)}{\partial y}
+\end{array}
+\right
+$
+\\
+$f_1$ y $f_2$ son continuas y tienen un extremo en $x_0$ e $y_0$ respectivamente. Luego $f_1'(x_0) = \frac{\partial f(x_0,y_0)}{\partial x} = 0$ y $f_2'(y_0) = \frac{\partial f(x_0,y_0)}{\partial y} = 0$
+\end{demo}
+\section{Taylor y Extremos}
+\propiedad $f : \rene \rightarrow \mathbb{R}$ de clase $C^3$. $P$ un punto crítico de $f$. Si el Hessiano de $f$ en P es definido positivo entonces $P$ es un mínimo relativo.
+\begin{demo}
+Quiero ver que $f(X) > f(P) \ \ \ \forall X \in \rene$ cerca de P. \\
+Por taylor como $f$ es $C^3$, $f(X) = f(P) + \nabla f(P) \cdot (X-P) + \frac{1}{2} (X-P) H_{f_P} (X-P)^t + R_{f_P} (X-P)$. \\
+Con $R_{f_P}$ que satisface que $\displaystyle\lim_{x \rightarrow p} \frac{R_{f_P}(X-P)}{\norm{X-P}^2} = 0$ \\
+$\nabla f(P) = 0$ por ser f punto crítico. \\
+Entonces \\
+$f(X) = f(P) + \frac{1}{2} (X-P) H_{f_P} (X-P)^t + R_{f_P} (X-P) = f(P) + {\norm{X-P}}^2 ( \frac{1}{2} \frac{(X-P) H_{f_P} (X-P)^t}{\norm{X-P}^2} + \frac{R_{f_P} (X-P)}{\norm{X-P}^2}) = \\
+= f(P) + {\norm{X-P}}^2 ( \frac{1}{2} \frac{X-P}{\norm{X-P}} H_{f_P} \frac{(X-P)^t}{\norm{X-P}} + \frac{R_{f_P} (X-P)}{\norm{X-P}^2}) $ \\
+El conjunto $ B =  \left\lbrace X \in \rene / \norm{X} = 1 \right\rbrace $ es un conjunto compacto y $\frac{X-P}{\norm{X-P}} \in B$. \\
+Sabiendo que $Q(X) =  X H_{f_P} X^t$ es una función continua y que por lo tanto $Q$ restringida a $B$ tiene un mínimo y un máximo, llamémosle $m = \min \left\lbrace Q(\frac{(X-P)}{\norm{X-P}}) \right\rbrace$. \\
+Luego $f(X) = f(P) + \norm{X-P}^2( \frac{1}{2} Q(\frac{X-P}{\norm{X-P}}) + \frac{R_{f_P}(X-P)}{\norm{X-P}^2}) > f(P) + \norm{X-P}^2( \frac{m}{2} + \frac{R_{f_P}}{\norm{X-P}^2}) $ \\
+Pero además teníamos que $\displaystyle\lim_{x \rightarrow p} \frac{R_{f_P}(X-P)}{\norm{X-P}^2} = 0$. \\
+Es decir $\forall \varepsilon > 0$  $\exists \delta > 0 \mbox{ tal que } 0 < \norm{X-P} < \delta \Rightarrow \abs{\frac{R_{f_P}(X-P)}{\norm{X-P}^2}} < \varepsilon \Leftrightarrow -\varepsilon < \frac{R_{f_P}(X-P)}{\norm{X-P}^2} < \varepsilon$. \\
+Entonces tomando $\varepsilon = \frac{m}{2} > 0$ (por ser $H_{f_P}$ definida positiva, $Q(X) = X H_{f_P} X^t  > 0 \ \ \forall X \in \rene$). \\
+Nos queda $\exists \delta > 0$ tal que $\norm{X-P} < \delta \Rightarrow \frac{R_{f_P}(X-P)}{\norm{X-P}^2} > - \frac{m}{2}$. \\
+$ \Rightarrow f(X) > f(P) + \norm{X-P}^2 ( \frac{m}{2} - \frac{R_{f_P}(X-P)}{\norm{X-P}^2} ) > f(P) + \norm{X-P}^2  (\frac{m}{2} - \frac{m}{2}) = f(P)$ si $\norm{X-P} < \delta$ ($X$ está dentro de la bola de radio delta).\\
+$ \Rightarrow$ P es un mínimo relativo de $f$
+\end{demo}
+\teoremaDe{Multiplicadores de Lagrange}: Sea $f: \rene[2] \rightarrow \mathbb{R}$ diferenciable en P
+\end{document}
