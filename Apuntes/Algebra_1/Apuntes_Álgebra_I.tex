@@ -586,6 +586,18 @@ $$d = \prod_{i=0}^{\infty} {{p_{i}}^{\max \left\lbrace {\mathcal{V}_{p_i}(a)}, {
 	Si $a \perp p \Rightarrow a^{p-1} \equiv 1 (p)$
 	\cr $a^{p} \equiv a (p) \ \ \forall a \in \mathbb{Z}$
 \end{tabular}
+\\
+\ifversionlarga
+\begin{demo}
+	En el caso $a \perp p$, como $a \perp p$ $a,2a,\dots,(p-1)a$ tiene que generar en cualquier orden $1,2,\dots,p-1$ es decir \\
+	$a \cdot 2a \cdots (p-1)a \equiv 1 \cdot 2 \cdots (p-1) (\mbox{mód } p) \Leftrightarrow a^{p-1}  {(p-1)!} \equiv (p-1)! (\mbox{mód } p) \Leftrightarrow p \mid {(a^{p-1}-1)(p-1)!}$. \\ Entonces como $p$ es primo $p \mid {(a^{p-1}-1)} \vee p \mid {(p-1)!}$ pero $p \nmid {(p-1)!}$ ya que $p \nmid 1 \wedge \dots \wedge p \nmid p-1$. \\Luego $p \mid {(a^{p-1}-1)} \Leftrightarrow a^{p-1} \equiv 1 (\mbox{mód } p)$
+	\par\indent En el caso en que $a \not\perp p$. \\
+	Vale $\forall a,b \in \mathbb{Z}$ $(a+b)^{p} \equiv \sum_{i = 0}^{n} {\binom{p}{i} {a}^{i} {b}^{p-i}} \equiv a^{p}+b^{p} (\mbox{mód } p)$ Pues $p \mid \binom{p}{i} \  \forall i=1 \dots (p-1)$ porque $p$ es primo. \\
+	Entonces $a^{p} \equiv (1+1+\dots+1)^{p} \equiv 1^{p}+\dots+1^{p} \equiv 1+1+\dots+1 \equiv a (\mbox{mód } p)$
+\end{demo}
+\else
+\fi 
+\hspace*{\fill} \\
 
 \definicion Dado $n \in \mathbb{N}$, $\phi (n) = \# \left\lbrace k \in \mathbb{Z} \ \mbox{ tal que } 1 \leq k \leq n, k \perp n \right\rbrace$ \\ \\
 
@@ -708,6 +720,17 @@ $$ \\ \\
 	\item $ord(z) \mid n$
 	\item $ord(z_k) = \frac{n}{(n:k)}$
 \end{itemize}
+\ifversionlarga
+\begin{demo}
+	\begin{itemize}
+		\item Llamando $ord(z)=m$.Por Algoritmo de división $n = mq + r$ con $q,r \in \mathbb{Z}, 0 \leq r < m$. \\
+		Pero $1 = z^{n} = z^{m*q+r} = {\left( z^{m} \right)}^{q} z^{r} = 1^{q} z^{r} = z^{r}$. Si $r \neq 0$ es absurdo pues me está diciendo que $z^{r}=1$ y $r < m$ es decir que $ord(z) \neq m$. Luego $r = 0$ por lo tanto $ord(z) \mid n$
+		\item Por un lado siendo $z = \cis{\frac{2k\pi}{n}}$.\\${z_{k}}^{\frac{n}{(n:k)}}=\cis{\frac{2k\pi}{n} \frac{n}{(n:k)}} = \cis{\frac{2k\pi}{(n:k)}} = 1$ porque $(n:k) \mid k \\ \Rightarrow ord(z) \leq \frac{n}{(n:k)}$ \\
+		Por otro ${\left(z_{k} \right)}^{j}=1$ ($j \in \mathbb{N}$) $\Leftrightarrow kj \equiv 0 (n) \Leftrightarrow n \mid kj \Rightarrow \frac{n}{(n:k)} \mid \frac{kj}{(n:k)} \Rightarrow \frac{n}{(n:k)} \mid j$ (pues $\frac{n}{(n:k)} \perp \frac{k}{(n:k)}$) $\Rightarrow \frac{n}{(n:k)} \leq j$ \\ $\Rightarrow ord(z) \geq \frac{n}{(n:k)}$ \\
+		Luego $ord(z) = \frac{n}{(n:k)}$
+	\end{itemize}
+\end{demo}
+\fi
 
 \definicion si $z \in G_n$, $z$ se dice primitiva si todo elemento de $G_n$ es una potencia de $z$. Es decir, $z$ es primitiva si $G_n = \left\lbrace z^{k} / k \in \mathbb{Z} \right\rbrace$ \\ \\
 
@@ -727,6 +750,21 @@ $$ \\ \\
 	\item $n=p_1 \cdot p_2 \cdot p_3 \cdots p_n$ producto de primos todos distintos $\Rightarrow \displaystyle \sum_{w \in G_{p_1 \cdot p_2 \cdots p_n}^{*}} {w} = (-1)^{\#\left\lbrace p_1,p_2, \cdots,p_n \right\rbrace}$ 
 	
 \end{itemize}
+
+\ifversionlarga
+\begin{demo}
+	\begin{itemize} 
+		\item $z = \cis{\frac{2k\pi}{n}}$ \\
+		Por un lado $z \in G_{n}^{*} \Rightarrow G_{n} = \left\lbrace z^{0},z^{1},\dots,z^{n-1} \right\rbrace$ como son todos distintos y $z^{n}$ es 1 \\ $\Rightarrow \min \left\lbrace j \in \mathbb{N} \mbox{ tq } z^{j} = 1 \right\rbrace = n \Rightarrow ord(z)=n$ \\
+		Por otro siendo $ord(z)=n \Leftrightarrow \frac{n}{(n:k)} = n \Leftrightarrow (n:k)=1$. \\ Además $z^{t}=z^{s} \Leftrightarrow kt \equiv ks (n) \Leftrightarrow n \mid {k(t-s)} \Rightarrow n \mid t-s$ (pues $n \perp k$) $\Leftrightarrow t \equiv s (n)$. \\ Esto me dice $z^{j}$ con $j \in \mathbb{Z}_{n}$ son todos distintos. \\ Luego $ord(z)=n \Rightarrow G_{n} = \left\lbrace z^{0},z^{1},\dots,z^{n-1} \right\rbrace$
+		\item Usando la propiedad anterior es lo mismo que probar $ord(z)=n \Leftrightarrow z = \cis{\frac{2k\pi}{n}}$ con $k \perp n$ \\
+		$z = \cis{\frac{2k\pi}{n}}$. Pero $ord(z)=n \Leftrightarrow \frac{n}{(n:k)} = n \Leftrightarrow (n:k)=1$
+		\item $z = \cis{\frac{2k\pi}{n}}$ con $(k:n)=1 \Leftrightarrow \overline{z} = \cis{\frac{-2k\pi}{n}}$ con $(-k:n)=(k:n)=1$
+		
+	\end{itemize}
+\end{demo}
+\fi
+
 
 \section{Polinomios}
 
