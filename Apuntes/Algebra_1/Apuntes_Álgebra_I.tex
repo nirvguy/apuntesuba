@@ -1,0 +1,882 @@
+\documentclass[a4paper,10pt]{article}
+\textheight=25cm %Establece el largo del texto en cada página. El default es 19 cm. 
+\textwidth=17cm %Establece el ancho del texto en cada página (en este caso, de 17 cm). El default es 14 cm. 
+\topmargin=-1cm %Establece el margen superior. El default es de 3 cm, en este caso la instrucción sube el margen 1 cm hacia arriba. 
+\oddsidemargin=0mm %Establece el margen izquierdo de la hoja. El default es de 4.5 cm; sin embargo, con sólo poner esta instrucción el margen queda en 2.5 cm. Si el parámetro es positivo se aumenta este margen y si es negativo disminuye. 
+\parindent=0mm %elimina la sangría. 
+\usepackage[utf8x]{inputenc} % Paquete de idioma que incluye escritura latina
+\usepackage{amssymb}        % Paquete para símbolos matemáticos
+\usepackage{amsmath}
+\usepackage{graphicx}       % Paquete para insertar imágenes
+\usepackage[colorlinks=true,linkcolor=black,urlcolor=black]{hyperref} 
+\usepackage{bookmark}       % Índice por Secciones en el PDF
+\usepackage[spanish,es-nolists]{babel}
+\title{ Apuntes de Álgebra I}
+\setcounter{secnumdepth}{3}
+\author{Juan Cruz Sosa}
+\date{15 de febrero de 2013}
+%%%%%%%%%%%%%%%% ESTO HACE QUE NO APAREZCA LA NUMERACIÓN EN LAS SECCIONES SALVO EN EL ÍNDICE %%%%%%%%%%%%%%%%%%%%%%
+%\makeatletter													 %%
+%\renewcommand\@seccntformat[1]{}										 %%
+%\makeatother												         %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{../macros/matematica}
+%%%%%%%%%%%%% ESTO HACE QUE SE IMPRIMAN LAS DEMOSTRACIONES
+%\versionlargatrue %%%%%%%%%% SI NO SE QUIEREN INPRIMIR LAS DEMOSTRACIONES SE PONE \versioncortafalse
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\maketitle
+\tableofcontents 
+\clearpage
+
+\section{Conjuntos, relaciones y funciones}
+
+
+\subsection{Conjuntos}
+
+
+\definicion Un conjunto es una colección de objetos.\\ \\
+\definicion 
+\begin{tabular}{l}
+$x \in A$ si $x$ es uno de los objetos de A. 
+\cr $x \not \in A$ si $x$ no es uno de los objetos de A.\\
+\end{tabular} \\ \\
+\definicion $A$ está incluido en B (se escribe $A \subset B$ o $A \subseteq B$) si todos los elementos de $A$ están en $B$, otra forma: $\forall x \in A \Rightarrow x \in B$ \\ \\
+\definicion $A \subsetneq B$ si $A \subset B$ pero $A \not = B$ \\ \\
+\operaciones \\ \\
+Si $A$ y $B$ son conjuntos:
+\begin{itemize}
+	\item $A \cup B$ es el conjunto cuyos objetos están en $A$ o $B$ o ambos
+	\item $A \cap B$ es el conjunto cuyos objetos están en $A$ y $B$
+	\item $A - B$ es el conjunto cuyos objetos están en $A$ y no en $B$
+	\item $A \bigtriangleup B$ es el conjunto cuyos objetos están en $A$ o exclusivamente en $B$
+	\item $A^c$ es el conjunto cuyos objetos son los objetos que no están en A
+\end{itemize} 
+\propiedades
+\begin{itemize}
+	\item $x \in A \cup B \Leftrightarrow (x \in A) \vee (x \in B)$
+	\item $x \in A \cap B \Leftrightarrow (x \in A) \wedge (x \in B)$
+	\item $x \in A - B \Leftrightarrow x \in A \, \wedge \, x \not \in B$
+	\item $x \in A^c \Leftrightarrow x \not \in A$
+	\item ${(A^c)}^c = A$
+	\item $x \in A \bigtriangleup B \Leftrightarrow $ 
+		\begin{tabular}{l}
+			$(x \in A \cup B) \wedge (x \not \in A \cap B)$
+			\cr $(x \in A \wedge x \not \in B) \vee (x \in B \wedge x \not \in A)$
+			\cr $x \in (A - B) \cup (B - A)$
+			\cr $x \in ((A \cup B) - (B \cap B))$
+		\end{tabular}
+	\item ${(A \cap B)}^{c} = A^c \cup B^c$
+	\item ${(A \cup B)}^{c} = A^c \cap B^c$
+\end{itemize}
+\notacion Notamos $\mathcal{U}$ al conjunto referencial o universal, el que contiene a todos los objetos con los que se está trabajando \\ \\
+\propiedades
+\begin{itemize}
+	\item $\emptyset ^ c = \mathcal{U}$
+	\item $\mathcal{U}^c = \emptyset$
+\end{itemize}
+
+\definicion $A$ y $B$ conjuntos, $A = B \Leftrightarrow $ 
+	\begin{tabular}{l}
+		Si tienen los mismos elementos
+		\cr $A \subseteq B$ y $B \subseteq A$
+		\cr $A \bigtriangleup B = \emptyset$
+		\cr $\forall x \, \, x \in A \Leftrightarrow x \in B$
+	\end{tabular}
+
+\definicion $A$ conjunto, $\mathcal{P}(A)$ es el conjunto de partes de $A$ si $\mathcal{P}(A)$ es tal que $\forall B$ conjunto, $B \in \mathcal{P}(A) \Leftrightarrow B \subseteq A$ \\ \\
+\definicion Denotamos $\#A$ como la cantidad de elementos de $A$ \\ \\
+\definicion $A$,$B$ conjuntos, se define el producto cartesiano de $A$ y $B$ como
+$$ A \times B = \left \{ (a,b) / {a \in A, b \in B} \right \} $$
+
+
+\subsection{Relaciones}
+
+
+\definicion $A$ y $B$ conjuntos, una relación entre $A$ y $B$ es un subconjunto de $A \times B$ \\ \\
+\notacion si $\mathcal{R} \subseteq A \times B$ es una relación, se puede escribir $(x,y) \in \mathcal{R}$, o $x \mathcal{R} y$ \\ \\
+\definicion Una relación $\mathcal{R}$ se dice
+\begin{itemize}
+	\item Reflexiva: si $\forall x \in A$, $x \mathcal{R} x$
+	\item Simétrica: si $\forall x,y \in A$, $x \mathcal{R} y \Rightarrow y \mathcal{R} x$
+	\item Transitiva: si $\forall x,y,z \in A$, $x \mathcal{R} y \wedge y \mathcal{R} z \Rightarrow x \mathcal{R} z$
+	\item Antisimétrica: si $\forall x,y \in A$, $x \mathcal{R} y \wedge y \mathcal{R} x \Rightarrow x = y$
+\end{itemize}
+\definicion $A$ conjunto, $\mathcal{R} \subseteq A \times A$ relación se dice de \textbf{orden} si $\mathcal{R}$ es:
+\begin{itemize}
+	\item Reflexiva
+	\item Transitiva
+	\item Antisimétrica
+\end{itemize}
+
+\definicion Una relación de orden se dice total si $\forall x,y \in A, x \mathcal{R} y \wedge y \mathcal{R} x$ \\ \\
+\definicion $A$ conjunto, $\mathcal{R} \subseteq A \times A$ relación se dice de \textbf{equivalencia} si $\mathcal{R}$ es: 
+\begin{itemize}
+	\item Reflexiva
+	\item Simétrica
+	\item Transitiva
+\end{itemize}
+\definicion $A$ conjunto, una partición de $A$ es un conjunto $P$ tal que
+\begin{itemize}
+	\item Cada uno es subconjunto de $A$ ( $P \subset \mathcal{P}(A)$)
+	\item Todos los elementos de $A$ están en algún elemento de $P$ es decir: $\forall x \in A$, \ $\exists B \in P$ tal que $x \in B$ 
+	\item Los elementos de $A$ están en algún elemento único de $P$ es decir: si $B_1$,$B_2 \in P$ y $B_1 \not = B_2 \Rightarrow B_1 \cap B_2 = \emptyset$
+	\item El vacío no pertenece a $P$ ($\emptyset \not \in P$)
+\end{itemize}
+\teorema $A$ conjunto
+\begin{itemize}
+	\item Si $\mathcal{R} \subset A \times A$ es relación de equivalencia, $P = \left \{ \bar{x}, \bar{x} \in A \right \}$ es una partición de $A$
+	\item $P$ es una partición de $A$, $\mathcal{R} \subseteq A \times A$ definida por $x \mathcal{R} y \Leftrightarrow \exists B \in P$ tal que $x \in B \wedge y \in B$
+\end{itemize} 
+\definicion $P \subset A \times A$ es relación de equivalencia, $x \in A$ la clase de equivalencia de $x$ es
+$$\bar{x} = \left\{y \in A / x \mathcal{R} y \right\}$$
+
+
+\subsection{Funciones}
+
+
+\definicion $A$, $B$ conjuntos, $f$ una función $f:A \longrightarrow B$ es una relación tal que $\forall a \in A \mbox{, } \exists b \in B$ tal que $a \mbox{ } f \mbox{ } b$ \\ \\
+\notacion si $a \mbox{ } f \mbox{ } b$, escribimos $b = f(a)$ \\ \\
+\definicion $f: A \longleftrightarrow B$ una función. $A$ se dice dominio (conjunto de partida) y $B$ se dice codominio (conjunto de llegada)
+\begin{itemize}
+	\item $\left\{ b \in B \mbox{ tq } \exists a \in A, f(a) = b \right\} = Im(f)$
+	\item $\left\{ f(a) \mbox{ tq } a \in A \right \} = Im(f) $
+\end{itemize}
+\definicion $f:A \longrightarrow B$ función f se dice
+\begin{itemize}
+	\item Inyectiva: 
+		\begin{tabular}{l}
+			$\mbox{Si } \forall x_1,x_2,x_1 \not = x_2 \Rightarrow f(x_1) \not = f(x_2)$
+			\cr $\mbox{Si } \forall x_1,x_2, f(x_1) = f(x_2) \Rightarrow x_1 = x_2$
+		\end{tabular}
+	\item Sobreyectiva, subyectiva o suryectiva: 
+		\begin{tabular}{l}
+			$\mbox{Si } \forall b \in B \mbox{, } \exists a \in A \mbox{ tal que } f(a) = b$
+			\cr $Im(f) = B$
+		\end{tabular}
+	\item Biyectiva: Si es inyectiva y suryectiva
+\end{itemize}
+\definicion Composición: $f:A \longrightarrow B$, $f:B' \subseteq B \longrightarrow C$ si $a \in A \mbox{, } g \left(f\left(a\right)\right) \in C$ \\ $g \circ f: A \longrightarrow C$, $g \left(f\left(a\right)\right) = \left(g \circ f \right)(a)$ \\ \\
+\definicion A conjunto, la identidad de $A$ es la función $Id_{A} = 1_{A} = I_{A} \mbox{, } 1_{A}(a) = a$ \\ \\
+\definicion Si $f:A \longrightarrow B$ y $g:B \longrightarrow A$ se dice inversa de $f$ si $g \circ f = 1_{A} \mbox{ y } f \circ g = 1_{B}$ \\ \\
+\notacion $g$ inversa de $f$, $g = f^{-1}$ \\ \\
+\propiedades 
+\begin{itemize}
+	\item $f:A \longrightarrow B$ es inversible si y solo si es biyectiva
+	\item $f:A \longrightarrow B$, $\exists g:B \longrightarrow A$ tal que $f \circ g = 1_{B} \Leftrightarrow f$ es sobreyectiva
+	\item $f:A \longrightarrow B$, $A \not = \emptyset$ $\exists g:B \longrightarrow A$ tal que $g \circ f = 1_{A}  \Leftrightarrow f$ es inyectiva
+\end{itemize}
+\clearpage
+
+\section{Naturales}
+
+
+\subsection{Axiomas de Piano}
+
+
+\begin{itemize}
+	\item 1 es un numero natural 
+	\item El sucesor de un numero natural es un numero natural
+	\item 1 no es sucesor de ningún natural
+	\item Dos naturales distintos tienen dos sucesores distintos
+\end{itemize}
+
+O definido de una forma más rigurosa \\
+
+\begin{itemize}
+	\item $1 \in \mathbb{N}$
+	\item $S: \mathbb{N} \longrightarrow \mathbb{N}$
+	\item $S$ es inyectiva
+	\item Si un conjunto de números naturales contiene al 1 y al sucesor de cada uno de sus elementos. Es el conjunto de todos los naturales
+	\item Si $A \subseteq \mathbb{N}$, $1 \in A$ y $\forall n \in A \mbox{ } S(n) \in A \Rightarrow A = \mathbb{N}$
+\end{itemize} 
+
+
+\subsection{Inducción}
+
+
+$P$ una propiedad sobre los números naturales. \\ Si
+\begin{itemize}
+	\item 1 satisface $P$
+	\item Si $n$ satisface a $P \Rightarrow n + 1$ satisface a $P$
+\end{itemize} 
+Entonces vale $P(n) \mbox{ } \forall n \in \mathbb{N}$
+
+\subsection{Inducción corrida}
+
+
+Supongamos que $P$ es una propiedad talque
+\begin{itemize}
+	\item Vale $P(n_0)$ con $n \in \mathbb{N}$
+	\item Vale $P(n) \Rightarrow P(n+1) \mbox{ } \forall n \geq n_0$
+\end{itemize} 
+Entonces vale $P(n)$  $\forall n \geq n_0$
+
+
+\subsection{Inducción Global}
+
+
+$P$ propiedad en $\mathbb{N}$, qvq $P(n)$ vale $\forall n \in \mathbb{N}$ si 
+\begin{itemize}
+	\item Vale $P(1)$
+	\item $P(1) \wedge P(2) \wedge P(3) \wedge \cdots \wedge P(n) \Rightarrow P(n+1)$
+\end{itemize}
+Entonces vale $P(n) \mbox{ } \forall n \in \mathbb{N}$
+
+
+\subsection{Propiedades en $\mathbb{N}$}
+
+
+Algunas series...
+{\fontsize{12pt}{12pt} \selectfont % sustituye "40 pt", por el tamaño que te interese.
+$$\forall n \in \mathbb{N} \mbox{,   } \sum_{i = 0}^{n} {b_{i}-b_{i+1}} = b_{0} - b_{n+1} $$
+$$\forall n \in \mathbb{N} \mbox{,   } \sum_{i = 0}^{n} {a{r}^{i}} = a \frac {{r}^{n+1}-1} {r-1} $$
+$$\forall n \in \mathbb{N} \mbox{,   } \sum_{i = 0}^{n} {\binom{n}{i} {a}^{i} {b}^{n-i}} = {(a + b)}^n $$
+$$\forall n \in \mathbb{N} \mbox{,   } \sum_{i = 1}^{n} {i} = \frac {n(n + 1)} {2} $$
+$$\forall n \in \mathbb{N} \mbox{,   } \sum_{i = 0}^{n} {\binom{n}{i}} = 2^{n} $$
+$$\forall n \in \mathbb{N} \mbox{,   } \sum_{i = 0}^{n} {{(-1)}^{i}\binom{n}{i}} = 0 $$
+$$\forall n \in \mathbb{N} \mbox{,   } \sum_{i = 0}^{n} {\binom{k+i}{i}} = \binom{k+n+1}{n} $$
+$$\forall n \in \mathbb{N} \mbox{,   } \sum_{i = 1}^{n} {i\binom{n}{i}} = n {2}^{n-1}$$
+Combinatorios...
+$$\binom{n}{m} = \frac {n!}{m!(n-m)!} \quad \forall n,m \in \mathbb{N} \quad \mbox{con } 0 \leq m \leq n $$
+$$\binom{n}{0} = 1 = \binom {n} {n}$$
+$$\binom{n}{1} = n = \binom {n} {n-1}$$
+$$\binom{n}{m} = \binom {n}{n-m}$$
+$$\binom{n}{m} = \binom {n-1} {m-1} + \binom {n-1} {m}$$
+$$k\binom{n}{k} = n \binom {n-1} {k-1}$$
+$$p\mbox{ primo } p \mid {\binom{p}{i}}$$
+}
+
+\subsection {Recursividad}
+
+
+\definicion A conjunto $g: \mathbb{N} \times A \longrightarrow A$, $a_0 \in A$ \\
+Se define $f: \mathbb{N} \longrightarrow A$ de la siguiente manera
+$\left\{
+\begin{array}{rcl}
+     f(1) & = & a_0
+  \\ f(n) & = & g(n,f(n-1))
+\end{array}
+\right.$ \\
+Esto define una única función f: $\mathbb{N} \longrightarrow \mathbb{N}$
+
+
+\subsection {Principio de buena ordenación}
+
+
+\definicion $A$ es un conjunto, $\leq$ una relación de orden en $A$, $A$ se dice bien ordenado si $\forall B \subseteq A, B \neq \emptyset, \ \ \exists b_0 \in B \ tal \ que \ b_0 \leq b \ \ \forall b \in B$  
+
+\propiedad Un conjunto bien ordenado es totalmente ordenado.
+
+\teorema $\mathbb{N}$ esta bien ordenado (con el orden usual)
+
+
+
+\section{Combinatoria y Probabilidad}
+
+
+
+
+\subsection{Conjuntos Independientes}
+
+
+\ejemplo \\ \\
+\begin{tabular}{ l  l }
+   3 pares de zapatillas & $Z_1,\ Z_2,\ Z_3$
+   \\ 4 pantalones & $P_1,\ P_2,\ P_3,\ P_4$
+   \\ 6 remeras & $R_1,\ R_2,\ R_3,\ R_4,\ R_5,\ R_6$
+ \end{tabular} \\
+
+Formas de vestirse $Z_1,\ R_1,\ P_1,\cdots,Z_1,\ R_3,\ P_2,\cdots$: \ \ \  $3 \cdot 4 \cdot 6 = 72$
+
+
+\subsection{Permutaciones}
+
+\ejemplo Contraseña de 10 letras usando \textit{QWERTYUIOP} sin repetir \\ 
+
+\begin{center}
+  \begin{tabular}[t]{ | l | c | c | c | c | c | c | c | c | c | c | }
+    \hline
+    Posición & 1° & 2° & 3° & 4° & 5° & 6° & 7° & 8° & 9° & 10° \\
+    \hline Posibilidades & 10 & 9 & 8 & 7 & 6 & 5 & 4 & 3 & 2 & 1 \\
+    \hline
+  \end{tabular}
+\end{center}
+
+Las posibilidades totales son: $10 \cdot 9 \cdot 8 \cdot 7 \cdot 6 \cdot 5 \cdot 4 \cdot 3 \cdot 2 \cdot 1 = 10!$ \\ \\
+
+$P_n = n! \mbox{ con } n \geq 0$
+
+
+\subsection{Variaciones}
+
+
+\ejemplo Carrera con 8 corredores, 1°, 2° y 3° puesto. Cuantas posibilidades hay para esos 3 puestos.
+
+\begin{center}
+  \begin{tabular}[t]{ | l | c | c | c | }
+    \hline
+    Puesto & 1° & 2° & 3° \\
+    \hline Posibilidades & 8 & 7 & 6 \\
+    \hline
+  \end{tabular}
+\end{center}
+
+Las posibilidades son: \ \ $8 \cdot 7 \cdot 6 = \frac{8 \cdot 7 \cdot 6 \cdot 5 \cdot 4 \cdot 3 \cdot 2 \cdot 1}{5 \cdot 4 \cdot 3 \cdot 2 \cdot 1} = \frac{8!}{5!} = \frac{8!}{(8-3)!}$  \\ \\
+
+$V_{n,k} = \frac {n!} {(n-k)!} \mbox{ con } 0 \leq k \leq n$
+
+
+\subsection{Combinaciones}
+
+
+\ejemplo 8 corredores, miro 3 del podio pero no los distingo
+
+Las posibilidades son: \ \ $\frac{8!}{5!} \cdot \frac{1}{3!} = \frac{8!}{5! \cdot 3!} = \binom {8}{3} = \binom {8}{5}$ (A las variaciones le quito las permutaciones de los puestos ya que los considero indistinguibles). \\ \\
+
+$C_{n,k} = \binom {n}{k} \mbox{ con } 0 \leq k \leq n$
+
+
+\subsection{Bosones}
+
+\ejemplo Formas de ubicar 7 bolitas indistinguibles en cuatro cajas numeradas. \\
+Es lo mismo que contar cuantas palabras se pueden formar permutando las letras \textit{BBBBBBBCCC}
+Las posibilidades son: \ $\binom {7+4-1}{7} = \binom {7+4-1} {4-1} = \binom {10}{7} = \binom {10}{3}$
+
+$B_{n,k} = \binom {n+k-1}{k} \mbox{ con } 0 \leq k \leq n$
+
+
+\subsection{Mesa redonda}
+
+
+\ejemplo Formas de sentar a ocho personas en ocho sillas en una mesa redonda. \\
+Las posibilidades son: $\frac{8!}{8} = 7!$ (Permutación de 8 personas y le saco los 8 giros posibles de la mesa que son lo mismo)
+
+
+\subsection{Principio de Inclusión y Exclusión}
+
+Si se quiere contar el cardinal de la unión de varios conjuntos, hay que contar el cardinal de la unión y restarle lo que se cuenta varias veces y sumarle lo que se descarto más de una vez y...
+
+\begin{equation}
+  \begin{split}
+    \#\left(\bigcup_{i=0}^{n} {A_i}\right) = \sum_{i=0}^{n} {\left(\#A_i\right)} - \sum_{i,j:1 \leq i \leq j \leq n} {\#\left(A_i \cap A_j\right)} + \sum_{i,j,k: i \leq j \leq k \leq n} {\# \left(A_i \cap A_j \cap A_k \right)} - \cdots + \\ 
+    + \left(-1\right)^{n-1} \# \left( A_1 \cap \cdots \cap A_n \right)
+  \end{split}
+\end{equation} 
+
+o de otra manera más compacta: 
+
+\begin{equation}
+   \begin{split}
+  \#\left(\bigcup_{i=0}^{n} {A_i}\right) = \sum_{k=1}^{n} { { \left( -1 \right) }^{k+1} \# \left[ \bigcap_{i \in I \subseteq \left[ 1:n \right] \# I = k } {A_i} \right] }
+   \end{split}
+\end{equation}
+
+
+\subsection{Probabilidad}
+
+
+Finitas posibilidades equiprobables. \\
+$\mathcal{U} = $ Conjunto de posibilidades totales. \\
+$\mathcal{X} = $ Conjunto de posibilidades favorables. $\# \mathcal{X} \leq \# U$
+Se define $\mathcal{P}$ como la probabilidad de un succeso o varios sucesos $\mathcal{X}$ de la siguiente forma:\\
+$$ \mathcal{P}(X) = \frac{\# \mathcal{X}}{\#\mathcal{U}} $$ \\
+
+\ejemplo \\
+$A = $ Cara. $E = $ Seca.
+Tiro una moneda 3 veces. \\ $X = \left\{AAA\right\}$ \\ $U = \left\{AAA,AAE,AEA,AEE,EAA,EAE,EEA,EEE\right\}$ \\ $U \simeq \{A,E\} \times \{A,E\} \times \{A,E\}$ \\ $\mathcal{P}(\mbox{Al menos una cara})=\frac{7}{8}$ \\ $\mathcal{P}(\mbox{Dos caras}) = \frac {3}{8} $
+
+
+\subsection{Relaciones}
+
+$A$ conjunto con $n$ elementos \\ \\
+
+\elemento{Relaciones en A}: $2^{n^{2}}$ \\ \\
+
+\elemento{Relaciones reflexivas en A}: $2^{n^{2}-n}$ \\ \\
+
+\elemento{Relaciones reflexivas y simétricas en A}: $2^{\frac {n(n-1)} {2}}$ \\ \\
+
+\elemento{Relaciones antisimétricas en A}: $2^{n}3^{\frac {n(n-1)} {2}}$ \\ \\
+
+
+\subsection{Funciones}
+
+
+\elemento{Funciones}: $Func(A,B) = \left\{f:A \longrightarrow B \right\}$.\\$\#Fun(A,B)={\#B}^{\#A} $ \\ \\
+\elemento{Inyectivas}: $Iny(A,B) = \left\{f:A \longrightarrow B \mbox{, tal que f es inyectiva} \right\}$. \\$\#Iny(A,B) = \frac {({\#B})!} {(\# (B-A))!} $ \\ \\
+\elemento{Suryectivas}: $Sur(A,B) = \left\{f:A \longrightarrow B \mbox{, tal que f es suryectiva} \right\}$. \\$\#Sur(A,B) = \displaystyle \sum_{i=0}^{\#B} {(-1)^i \binom {\#B}{i} (\#B-i)^{\#A}}$ \\ \\
+\elemento{Biyectiva}: $Biy(A,A) = \left\{f: A \longrightarrow A \mbox{, tal que f es biyectiva} \right\}$. \\$\#Biy(A,B) = (\#A)!$ \\ \\
+\elemento{Estrictamente Crecientes}: $Ecrec(A,B) = \left\{f: A \longrightarrow B \mbox{, tal que f es estrictamente creciente} \right\}$. \\$ \# Ecrec(A,B) = \binom {\#B}{\#A}$ \\ \\
+\elemento{Estrictamente Decrecientes}: $Edecrec(A,B) = \left\{f: A \longrightarrow B \mbox{, tal que f es estrictamente decreciente} \right\}$. \\$ \# Edecrec(A,B) = \binom {\#B}{\#A}$ \\ \\
+\elemento{Crecientes}: $Crec(A,B) = \left\{f: A \longrightarrow B \mbox{, tal que f es creciente} \right\}$. \\$ \# Crec(A,B) = \binom {\#A + \#B - 1}{\#A}$ \\ \\
+\elemento{Decrecientes}: $Decrec(A,B) = \left\{f: A \longrightarrow B \mbox{, tal que f es decreciente} \right\}$. \\$ \# Decrec(A,B) = \binom {\#A + \#B - 1}{\#A}$ \\ \\
+
+
+
+
+\section{Enteros}
+
+
+
+
+\subsection{Divisibilidad}
+
+
+\definicion $x,y \in \mathbb{Z},\ x \not=0$ decimos que $x$ divide a $y$, ó, $y$ es divisible por $x$ si $\exists z \in \mathbb{Z}$ tal que $x \cdot z = y$  \\ \\
+
+\notacion Si x divide a y notamos $x \nmid y$ \\ \\
+
+\definicion $n \in \mathbb{Z}$ se dice irreducible si tiene 4 divisores \\ \\ 
+
+\definicion Los divisores de a $Div(a) = \left\{d \in \mathbb{Z} / d \mid a \right\}$ \\ \\
+
+\definicion $p \in \mathbb{Z}$ se dice primo si
+\begin{equation}
+    \forall a,b \in \mathbb{Z}, \ p \mid {a \cdot b} \Rightarrow p \mid a \vee  p \mid b 
+\end{equation}
+
+\propiedad Si $n \in \mathbb{Z}$, $n \not = \pm 1$ y $n$ no es primo. Entonces $\exists p$ primo tal que $p \mid n$ y $2 \leq p \leq \sqrt {\mid n \mid}$ \\ \\
+
+\propiedadesA{de divisibilidad} \\
+$a,b,d \in \mathbb{Z}$ y $n \in \mathbb{N}$ con $d \neq 0$
+\begin{itemize}
+  \item $( a \mid b \wedge b \mid a) \Leftrightarrow \abs{a} = \abs{b} \Leftrightarrow a = \pm b$
+  \item $d \mid a \Rightarrow \frac{a}{d} \in \mathbb{Z}$ 
+  \item $d \mid a$, $d \mid b \Rightarrow d \mid a + b$
+  \item $d \mid a$, $d \mid b \Rightarrow d \mid a \cdot b$
+  \item $d \mid a$, $d \mid b \Rightarrow d \mid (\alpha a + \beta b) \ \ \forall \alpha,\beta \in \mathbb{Z}$
+  \item $d \mid a \Rightarrow d \mid a \cdot c \ \ \forall c \in \mathbb{Z}$
+  \item $d \mid a \Rightarrow d^n \mid a^n$
+  \item $\pm 1 \mid a \ \ \forall a \in \mathbb{Z}$
+  \item $a \mid \pm 1 \Rightarrow a = \pm 1$
+  \item si $b \neq 0$ y $a \mid b$ entonces $\abs{a} \leq \abs{b}$
+  \item $a \mid 0 \ \forall a \in \mathbb{Z}$
+  \item $0 \mid a \Leftrightarrow a = 0$
+  \item $a \mid b$ y $b \mid c \Rightarrow a \mid c$
+  \item $d \mid a \Leftrightarrow d \mid -a \Leftrightarrow -d \mid a \Leftrightarrow -d \mid -a$
+  \item $a - b \mid a^n - b^n$
+  \item $a + b \mid a^n + (-1)^{n-1}b^n$
+  \item $n$ es compuesto, entonces $2^{n}-1$ es compuesto
+  \item $2^{n}-1$ es primo, entonces $n$ es primo
+\end{itemize}
+
+\teorema $n \in \mathbb{Z}$, $n \not = \pm 1$. Entonces $\exists p$ primo tal que $p \min n$ \\ \\
+
+\teorema Existen infinitos primos \\ \\
+
+\teoremaB{ del Algoritmo de división } $a,b \in \mathbb{Z}, b \not = 0$. $\exists! q,r \in \mathbb{Z}$ tal que $a = bq + r$ y $0 \leq r \< \mid b \mid$ 
+
+
+\subsection{Congruencia en $\mathbb{Z}$}
+
+$d \in \mathbb{Z}$, $d \neq 0$ \\ \\
+
+\definicion $a \equiv b (\mbox{mod } d ) \Leftrightarrow d \mid (a - b)$ \\ \\
+
+\teorema $a \equiv b (\mbox{mod } d )$ es una relación de equivalencia \\ \\
+
+\propiedades
+$a \equiv a' (d)$ y $b \equiv b'(d)$
+\begin{itemize}
+  \item $a \equiv a (d)$
+  \item $a \equiv a'(d) \Leftrightarrow a' \equiv a (d)$
+  \item $a \equiv a + dq (d) \ \ \forall q \in \mathbb{Z}$
+  \item $a \equiv b(d) \mbox{ y } b \equiv c (d) \Rightarrow a \equiv c (d)$
+  \item si $d \neq 0$, $a \equiv r_{d}(a) (d)$ 
+  \item $a + a' \equiv b + b' (d)$
+  \item $a \equiv b (d) \Rightarrow a \cdot p \equiv b \cdot p (d) \ \ \forall p \in \mathbb{Z}$
+  \item $a \cdot a' \equiv b \cdot b' (d)$
+  \item si $\alpha$ y $\beta \in \mathbb{Z}$ \ \ $\alpha a + \beta b \equiv \alpha a' + \beta b' (d)$
+  \item si $n \in \mathbb{N}_0$ \ \ $a^n \equiv {a'}^{n} (d)$
+  \item $n \in \mathbb{N}_0$ y $p$ primo si $a \equiv b (p) \Rightarrow a^{p^{n}} \equiv b^{p^{n}} (p^{n+1})$
+  \item $p$ primo positivo $(p-1)! \equiv -1 \equiv p-1 (p)$
+\end{itemize} 
+
+\definicion 
+\begin{tabular}{l}
+mcd = máximo común divisor
+\cr dcm = divisor común máximo
+\cr gcd = greatest common divisor
+\end{tabular}  
+$a,b \in \mathbb{Z}$, $(a,b) \neq (0,0)$ entonces el mcd es $d$ tal que:
+\begin{itemize}
+	\item $d \mid a$ y $d \mid b$
+	\item si $e \mid a$ y $e \mid b \Rightarrow e \leq d$
+\end{itemize}
+
+\definicion $a,b \in \mathbb{Z}$, $a \neq 0$, $b \neq 0$, $[a:b] = d$ si 
+\begin{itemize}
+	\item $a \mid d$, $b \mid d$
+	\item Si $a \mid c$, $b \mid c$, $c > 0 \Rightarrow d \leq c$
+\end{itemize}
+
+\definicion $a,b \in \mathbb{Z}$ $(a,b) = max \left( Div(a), Div(b) \right)$ \\ \\
+\notacion $d = (a:b)$ \ \ $d = mcd(a,b)$ \ \ $d = (a,b)$ \\ \\
+\propiedades
+\begin{itemize}
+	\item $(a:b) = (-a:b)$
+	\item $(a:b) = (b:a)$
+	\item $(a:b) = (\abs{a}:\abs{b})$
+	\item si $b \neq 0 \ \ (b:b) = \abs{b}$
+	\item si $k \in \mathbb{Z}, \ \ (a:b)=(a+kb,b)$
+	\item $\frac{a}{(a:b)}$ y $\frac{b}{(a:b)} \in \mathbb{Z}$
+	\item $(1,a) = 1$
+	\item $a \mid b \Leftrightarrow (a:b) = \abs {a}$
+	\item $(a:b) = (r_{b}(a):b) = (b:r_{b}(a))$
+	\item si $a \equiv r (b)$. Entonces $(a:b)=(a:r)$
+	\item $p$ es primo, $(p:a)=p$ ó $1$
+	\item $n,m \in \mathbb{N}, \ \ r_{n}(m) = r \Rightarrow r_{a^{m}-1}(a^{n}-1)=a^{r}-1$
+	\item $n,m \in \mathbb{N}, \ \ (a^{n}-1,a^{m}-1)=a^{(n:m)}-1$
+	\item si $(a:d)=1$  $a,2a,\dots,(d-1)a$ son todos distintos
+\end{itemize}
+\corolario si $(a:b) \neq (0,0)$ \\
+$\exists \alpha, \beta \in \mathbb{Z}$ tal que $(a:b) = \alpha a + \beta b$ \\ \\
+\definicion $a,b \in \mathbb{Z}$, $(a,b) \neq (0,0)$, El mcd de $a$ y $b$ es $d$ si
+\begin{itemize}
+	\item $d \mid a$ y $d \mid b$
+	\item $c \mid a$ y $c \mid b \Rightarrow c \mid d$
+\end{itemize}
+\definicion $a,b \in \mathbb{Z}$ $a$ y $b$ se dicen coprimos si $(a:b) = 1$ \\ \\
+\notacion $a \perp b \Leftrightarrow $ si $a$ y $b$ son coprimos \\ \\ 
+\propiedad Si $\exists \alpha, \beta \in \mathbb{Z}$ tal que $ 1 = \alpha a + \beta b \Leftrightarrow a$ y $b$ son coprimos \\ \\
+\propiedad $a,b \in \mathbb{Z}$, $(a,b) \neq (0,0) \Rightarrow (a:b) = min(\left\lbrace \alpha a + \beta b, \alpha,\beta \in \mathbb{Z} \right\rbrace \cap \mathbb{N} )$ \\ \\
+\propiedades
+\begin{itemize}
+	\item $a \perp b$, $c \mid b \Rightarrow a \perp c$
+	\item $a \mid c$, $b \mid c$, $a \perp b \Rightarrow ab \mid c$
+	\item $a \mid bc $, $a \perp b$, $a \mid c$
+	\item $a \perp b \Rightarrow a \perp b$
+	\item $(ca:cb) = \abs{c} (a:b)$
+	\item $\frac{a}{(a:b)} \perp \frac{b}{(a:b)}$
+	\item $(a^{n} : b^{n}) = {(a : b)}^{n}$
+	\item $[a:b] \cdot (a:b) = a \cdot b$
+	\item $a^{[p-1:q-1]} \equiv 1 (pq)$ si $p$ y $q$ son primos distintos y $a \perp pq$
+\end{itemize}
+
+\teorema $ax+by=d$ tiene solución $\Leftrightarrow (a:b) \mid d$ y son: $(a,b) = (x_0,y_0) + \lambda (\frac{-b}{(a:b)}, \frac{a}{(a:b)})$ donde $x_0$ e $y_0$ son una solución particular
+
+
+
+\subsection{Teorema fundamental de la Aritmética}
+
+
+\teorema Todo número $n \in \mathbb{Z}$ se puede escribir como una única descomposición  en números primos de la siguiente forma.
+$$n = sgn(n) \prod_{i=0}^{\infty} {{p_{i}}^{\mathcal{V}_{p_i}(n)}}$$ \ \ con $p_1,p_2,\cdots$ los primos en $\mathbb{N}$ y $\mathcal{V}_{p_i} (n)$ el exponente al que está elevado el primo \\ \\
+
+\observacion Si $a \mid d$ y $b \mid d$, $p \in \mathcal{P}$ 
+\begin{tabular}{l}
+	$\mathcal{V}_{a} \leq \mathcal{V}_{d}$ 
+	\cr $\mathcal{V}_{b} \leq \mathcal{V}_{d}$ 
+\end{tabular}
+
+\definicion $a,b \in \mathbb{Z}$, $(a,b) \neq (0,0)$, $(a,b) = d$ si 
+$$d = \prod_{i=0}^{\infty} {{p_{i}}^{\min \left\lbrace {\mathcal{V}_{p_i}(a)}, {\mathcal{V}_{p_i}(b)} \right\rbrace }}$$ \\ \\
+
+\definicion $a,b \in \mathbb{Z}$, $(a,b) \neq (0,0)$, $[a,b] = d$ si 
+$$d = \prod_{i=0}^{\infty} {{p_{i}}^{\max \left\lbrace {\mathcal{V}_{p_i}(a)}, {\mathcal{V}_{p_i}(b)} \right\rbrace }}$$ \\ \\
+
+\subsection{Euler - Fermat}
+
+ 
+\teoremaDe{Fermat}: $p$ primo entonces
+\begin{tabular}{l}
+	Si $a \perp p \Rightarrow a^{p-1} \equiv 1 (p)$
+	\cr $a^{p} \equiv a (p) \ \ \forall a \in \mathbb{Z}$
+\end{tabular}
+
+\definicion Dado $n \in \mathbb{N}$, $\phi (n) = \# \left\lbrace k \in \mathbb{Z} \ \mbox{ tal que } 1 \leq k \leq n, k \perp n \right\rbrace$ \\ \\
+
+
+\propiedades $p$ primo
+\begin{itemize}
+	\item $\phi(p) = p-1$
+	\item $\phi(p^{k}) = (p-1)p^{k-1}$
+	\item si $a \perp b$ entonces $\phi(nm) = \phi(n)\phi(m)$
+	\item $\displaystyle \phi(n) = n \prod_{p \mid n} { \left(1 - \frac{1}{p}\right)}$ donde los $p$ son los distintos primos que dividen a $n$.
+\end{itemize} 
+
+\teoremaDe{Euler - Fermat}: 
+\begin{tabular}{l}
+	Si $n \in \mathbb{N}$, $a \perp n \Rightarrow a^{\phi(n)} \equiv 1 (n)$
+	\cr $n \in \mathbb{N}$, $a^{\phi(n)+1} \equiv a (p) \ \ \forall a \in \mathbb{Z}$
+\end{tabular} \\ \\
+
+
+\section{Números Complejos}
+
+
+\subsection{Operaciones}
+
+
+\definicion $i \in \mathbb{I} \ / \ i^{2}=-1$ \\
+
+\operacionesDe{en forma binómica} $z=a+bi, \ \ w=c+di$
+\begin{itemize}
+	\item Parte real: $\Re(z) = a$
+	\item Parte imaginaria: $\Im(z) = b$
+	\item Suma: $z+w=(a+c)+(b+d)i \in \mathbb{C}$
+	\item Multiplicación: $z \cdot w = (ac - bd) + (ad - bc)i \in \mathbb{C}$
+	\item Módulo: $\abs{z}=\sqrt{a^{2}+b^{2}} \in \mathbb{R}$
+	\item Complemento o Conjugado: $\overline{z} = a-bi \in \mathbb{C}$
+	\item Inverso: $z^{-1} = \frac{\overline{z}}{{\abs{z}}^{2}} \in \mathbb{C}$
+	\item Potenciación: $n \in \mathbb{N}$ \ $z^{n} = \displaystyle \sum_{i = 0}^{n} {\binom{n}{i} {a}^{i} {(ib)}^{n-i}}$
+	\item Argumento: Si $z \neq 0 \ \ arg(z) = \alpha$ tal que $\cos(\alpha)=\frac {a}{\abs{z}}$ y $\sin(\alpha)=\frac {b}{\abs{z}}$ 
+\end{itemize}
+
+
+\teoremaDe{Moivre}: $z = a + bi = \abs {z} (\cos(\alpha)+ i \sin (\alpha))$ \\ \\
+
+\notacion $z = \abs {z} (\cos(\alpha)+ i \sin (\beta)) \Leftrightarrow z=(\abs {z},\alpha)$ \\ \\
+
+\operacionesDe{en forma polar}: $z=(\rho,\alpha) \ \ w=(\tau,\beta)$
+\begin{itemize}
+	\item Multiplicación: $z \cdot w = (\rho \tau, \alpha + \beta)$
+	\item Inverso: $z^{-1} = (\rho^{-1},-\alpha)$
+	\item Conjugado: $\overline{z} = (\rho,2\pi - \alpha) = (\rho,-\alpha)$ 
+	\item Modulo: $\abs {z} = \rho$
+	\item Potenciación: $n \in \mathbb{N}$ \ $z^{n} = (\rho^{n},n\alpha)$
+\end{itemize}
+
+
+\propiedadesA{del módulo y del conjugado}
+\begin{itemize}
+	\item $\abs{z} = 0 \Leftrightarrow z = 0$
+	\item $\abs{zw} = \abs{z} \abs{w}$
+	\item $\abs{z^{n}}=\abs{z}^{n}$, $n \in \mathbb{N}$
+	\item si $z \neq 0$ \ $\abs{z^{n}}=\abs{z}^{n}$,$n \in \mathbb{Z}$
+	\item $\abs{z+w} \leq \abs{z} + \abs{w}$
+	\item $\abs{\abs{z}-\abs{w}} \leq \abs{z-w}$
+	\item $\overline{1} = 1$
+	\item $z \in \mathbb{R} \Leftrightarrow \overline{z} = z$
+	\item $z \in \mathbb{I} \Leftrightarrow z = -\overline{z}$
+	\item $z = \overline{\overline{z}}$
+\end{itemize}
+
+
+\subsection {Raíces n-ésimas de la unidad}
+
+
+\elemento{Raíz cuadrada de un complejo} $z = c+di, \ z^{2} = a+bi = (c^{2}-d^{2})+i2cd \Leftrightarrow 
+\left\{
+\begin{array}{rcl}
+     c^{2} - d^{2} & = & a
+  \\ 2cd & = & b
+  \\ c^{2} + d^{2} & = & \sqrt {a^{2}+b^{2}}
+\end{array}
+\right.$ \\ \\
+
+\elemento{Raíz n-ésima de la unidad} $n \in \mathbb{N}, \ w \in \mathbb{C} \ w \neq 0, \ z=(\rho,\alpha), \ w = (\tau,\beta)$
+$$z^{n}=(\rho^{n},n \alpha) = (\tau,\beta) \Leftrightarrow
+\left\{
+\begin{array}{rcl}
+    \rho^{n} & = & \tau
+  \\ n \alpha & = & \beta + 2k\pi \mbox{ con } k \in \mathbb{Z}
+\end{array}
+\right. \Leftrightarrow
+\left\{
+\begin{array}{rcl}
+    \rho & = & \abs {\sqrt[n]{\tau}}
+  \\ \alpha & = & \frac {\beta + 2k\pi} {n}
+\end{array}
+\right. \Leftrightarrow z = (\abs {\sqrt[n]{\tau}},\frac {\beta} {n} + \frac {2k\pi} {n})
+$$ \\ \\
+
+\definicion $G_n = \left\lbrace z \in \mathbb{C} \mbox{ tal que } z^{n}=1 \right\rbrace = \left\lbrace (1,\frac{2k\pi} {n}) \mbox{ con } k = 0,1,2,\cdots,n \right\rbrace$ \\ \\
+
+\notacion $z_k \in G_n, \ z_k = \cos (\frac{2k\pi}{n}) + i\sin (\frac{2k\pi}{n})$ \\ \\
+
+\propiedades 
+\begin{itemize}
+	\item $\#(G_n) = n$
+	\item $G_{n} \cap G_{m} = G_{(n:m}$
+	\item $G_{n} \subseteq G_{m} \Leftrightarrow n \mid m$ 
+	\item $z \in G_n \Rightarrow \abs {z} = 1$
+	\item $z,w \in G_n \Rightarrow \overline{z}+\overline{w}=\overline{zw}(z+w)$
+	\item $z \in G_n \Leftrightarrow z^{-1} \in G_n$
+	\item $z \in G_n \Leftrightarrow \overline{z} \in G_n$
+	\item $z,w \in G_n \Leftrightarrow z \cdot w \in G_n$
+	\item $z,w \in G_n, \ z=(1,\frac{2k\pi}{n}), \ w=(1,\frac{2q\pi}{n}) \mbox{ entonces } z=w \Leftrightarrow k \equiv q (n)$
+\end{itemize}
+
+\definicion Si $z \in G_n$, $ord(z)=\min \left\lbrace k \in \mathbb{N} / z^{k}=1 \right\rbrace$ \\ \\
+
+\propiedades $z \in G_n$
+\begin{itemize}
+	\item $ord(z) \mid n$
+	\item $ord(z_k) = \frac{n}{(n:k)}$
+\end{itemize}
+
+\definicion si $z \in G_n$, $z$ se dice primitiva si todo elemento de $G_n$ es una potencia de $z$. Es decir, $z$ es primitiva si $G_n = \left\lbrace z^{k} / k \in \mathbb{Z} \right\rbrace$ \\ \\
+
+\notacion $G_{n}^{*}$ son las raíces primitivas de $G_n$ \\ \\
+
+\propiedades 
+\begin{itemize}
+	\item $z \in G_{n}^{*} \Leftrightarrow ord(z)=n$
+	\item $z_k \in G_{n}^{*} \Leftrightarrow z_k = \cis{\frac{2k\pi}{n}}$ con $k \perp n$
+	\item $z \in G_{n}^{*} \Leftrightarrow \overline{z} \in G_{n}^{*}$
+	\item $z \in G_{n} \ ord(z)=k \Rightarrow z \in G_k^{*}$
+	\item $\displaystyle \prod_{w \in G_{n}} {w} = (-1)^{n-1}$
+	\item $\displaystyle \sum_{w \in G_{n}} {w} = 0$ 
+	\item $p$ primo $\Rightarrow G_p = G_{p}^{*} \cup G_1 \mbox{ y } \displaystyle \sum_{w \in G_{p}^{*}} {w} = -1$
+	\item $p$ primo $\Rightarrow G_{p^{2}} = G_{{p}^{2}}^{*} \cup G_{p} \mbox{ y } \displaystyle \sum_{w \in G_{{p}^{2}}^{*}} {w} = 0$
+	\item $p,q$ primos distintos $\Rightarrow G_{pq} = G_{pq}^{*} \cup G_{p} \cup G_{q} \mbox{ y } \displaystyle \sum_{w \in G_{pq}^{*}} {w} = 1$
+	\item $n=p_1 \cdot p_2 \cdot p_3 \cdots p_n$ producto de primos todos distintos $\Rightarrow \displaystyle \sum_{w \in G_{p_1 \cdot p_2 \cdots p_n}^{*}} {w} = (-1)^{\#\left\lbrace p_1,p_2, \cdots,p_n \right\rbrace}$ 
+	
+\end{itemize}
+
+\section{Polinomios}
+
+\subsection{Anillo de polinomios}
+
+
+\definicion $\mathbb{K} = \left\lbrace \mathbb{Z}_p \ con \ p \ primo,\mathbb{Q},\mathbb{R},\mathbb{C} \right\rbrace$ un cuerpo. Se define un anillo de polinomio con coeficientes en $\mathbb{K}$ como
+$$\mathbb{K}[X] = \left\lbrace \sum_{k=0}^{n} {a_k{X^{k}}} \mbox{ con } n \in \mathbb{N}, a_i \in \mathbb{K} \ \forall i \in \mathbb{N}_0 \ \ 0 \leq i \leq n \right\rbrace$$
+
+\operacionesDe{en $\mathbb{K}[X]$} \\
+$f,g \in \mathbb{K}[X]$
+\begin{itemize}
+	\item Suma: $\displaystyle \sum_{k=0}^{n} {a_k{X^{k}}} + \sum_{k=0}^{m} {b_k{X^{k}}} = \sum_{k=0}^{\max \left\lbrace n,m \right\rbrace} {(a_k+b_k)X^{k}} $
+	\item Multiplicación: $\displaystyle \left( \sum_{k=0}^{n} {a_k{X^{k}}} \right) \cdot \left( \sum_{k=0}^{m} {b_k{X^{k}}} \right) = \sum_{k=0}^{n+m} {\left( {\sum_{i+j=k} {a_k b_k}} \right) X^{k}} $
+\end{itemize}
+
+
+\subsection{Divisibilidad}
+
+
+\definicion Dados $f,g \in \mathbb{K}[X]$ decimos $f$ divide a $g$ si $\exists q \in \mathbb{K}[X]$ tal que $g = fq$ \\ \\
+
+\notacion $f$ divide a $g \Rightarrow f \mid g$ \\ \\
+
+\propiedades
+\begin{itemize}
+	\item $c \cdot f \mid f \ \ \forall \in \mathbb{K}[X], \ c \in \mathbb{K}-\left\lbrace 0 \right\rbrace$
+	\item $f \mid g, \ g \mid h \Rightarrow f \mid h$
+	\item $f \mid g \Rightarrow f \mid gh \ \ \forall h \in \mathbb{K}[X]$
+	\item $f \mid g, f \mid h \Rightarrow f \mid g + h$
+	\item $c \mid f \ \ \forall c \in \mathbb{K}[X] - \left\lbrace 0 \right\rbrace, f \in \mathbb{K}[X]$
+	\item $f \mid c \mbox{ con } c \in \mathbb{K} - \{0\} \Rightarrow f \in \mathbb{K}-\{0\}$
+	\item $f \mid 0 \ \ \forall k \in \mathbb{K}[X]$
+	\item $0 \mid f \Leftrightarrow f = 0$
+	\item si $g \neq 0$ y $f \mid g \Rightarrow gr(f) \leq gr(g)$ 
+	\item $f \mid g$ y $g \mid f \Leftrightarrow \exists c \in \mathbb{K} - \{0\} / f = c.g$
+	\item $f \mid g \Leftrightarrow cf \mid g \Leftrightarrow f \mid q \Leftrightarrow cf \mid qf \ \ \ \forall c,q \in \mathbb{K}-\{0\}$
+\end{itemize}
+
+\definicion $f,g \in \mathbb{K}[X]$ se dicen asociados si $f \mid g$ y $g \mid f$ \\ \\
+
+\definicion $f \in \mathbb{K}[X]$ se dice primo si $f \neq 0$, $f$ no es una unidad, y $f$ es divisible solo por unidades de $\mathbb{K}[X]$ y asociados de $f$ \\ \\
+
+\definicion $f \in \mathbb{K}[X]$, $f \neq 0$ si $gr(f) = 1 \Rightarrow f$ es irreducible \\ \\
+
+\definicion $f \in \mathbb{K}[X]$, $f$ es irreducible $\Leftrightarrow$
+\begin{tabular}{l}
+	$f \neq 0$ y $gr(f) \geq 1$
+	\cr Dado $g \in \mathbb{K}[X]$, si $g \mid f$ entonces $gr(g) = 0$ o $gr(g) = gr(f)$
+\end{tabular} \\ \\
+
+\propiedad $f \in \mathbb{K}[X]$ es irreducible $\Leftrightarrow gr(f)=1$ \\ \\
+
+\propiedad $f,g,p \in \mathbb{K}[X]$, $p$ irreducible. Si $p \mid fg \Rightarrow p \mid f$ o $p \mid g$ \\ \\
+
+\elemento{Algoritmo de división} $f,g \in \mathbb{K}[X]$,entonces existen únicos $q,r \in \mathbb{K}[X]$ tal que $f=gq+r$ y $r = 0$ o $gr(r) < gr(g)$ \\ \\
+
+\definicion $f \in \mathbb{K}[X]$, denotamos especialización al elemento $c \in \mathbb{K}$ de $f$
+$$ f(c) = \sum_{k=0}^{n} {a_k c^{k}} $$ \\ 
+
+\propiedades
+\begin{itemize}
+	\item $(f+g)(a) = f(a)+g(a)$
+	\item $(f \cdot g)(a) = f(a) \cdot g(a)$
+\end{itemize}
+
+\teorema $f \in \mathbb{K}[X] a \in \mathbb{K}$, el resto de dividir a $f$ por $x-a$ es $f(a)$
+
+
+\subsection{Congruencia en $\mathbb{K}[X]$}
+
+
+\definicion $f,g,h \in \mathbb{K}[X]$ $f \equiv g (h) \Leftrightarrow h \mid f - g$ \\ \\
+
+\notacion $f \equiv g (h)$ lo decimos como $f$ es congruente a $g$ módulo $h$ \\ \\
+
+\propiedades
+\begin{itemize}
+	\item $f \equiv f (h) \ \ \forall f,h \in \mathbb{K}[X]$
+	\item $f \equiv g (h) \Leftrightarrow g \equiv f (h) \ \ \forall f,g \in \mathbb{K}[X]$
+	\item $f \equiv g (h) \wedge g \equiv r (h) \Rightarrow f \equiv r (h)$
+	\item $f \equiv g (h) \Leftrightarrow f + p \equiv g + p (h) \ \ \forall f,g,p \in \mathbb{K}[X]$ 
+	\item $f \equiv g (h)$ y $s \equiv t (h) \Rightarrow f + s \equiv g + t (h)$ y $f \cdot g \equiv g \cdot t (h)$ 
+	\item $f \equiv g (h) \Rightarrow f^{n} \equiv g^{n} (h) \forall f,g \in \mathbb{K}[X]$ y $n \in \mathbb{N}_0$
+	\item $f \equiv r_{h}(f) (h) \ \ \forall f,g,h \in \mathbb{K}[X]$
+	\item $f,r,h \in \mathbb{K}[X]$, $f \equiv r (h)$ y $gr(r) = 0$ o $gr(r) < gr(h)$ entonces $r$ es el resto de dividir $f$ por $h$ 
+	\item $f \equiv 0 (h) \Leftrightarrow h \mid f$
+	\item $f \equiv f + qh (h) \ \ \forall q \in \mathbb{K}[X]$
+	\item $p \in \mathbb{K}[X]$, Luego $f \equiv g (h) \Leftrightarrow f \cdot p \equiv g \cdot p (h \cdot g)$
+\end{itemize}
+
+
+\definicion $f,g \in \mathbb{K}[X]$, $(f,g) \neq (0,0)$ denotamos a $d$ $(f:g) = d$ como el máximo común divisor(es único) si $d$ cumple :
+\begin{itemize}
+	\item $d$ es mónico
+	\item $d \mid f$ y $d \mid g$
+	\item $h \mid f$ y $h \mid g \Rightarrow h \mid d$ o $gr(d) \leq gr(h)$
+\end{itemize}
+
+\propiedad $f,g \in \mathbb{K}[X]$. Existen $\alpha,\beta \in \mathbb{K}[X]$ tal que $(f:g) = \alpha f + \beta g$ \\ \\
+
+\definicion $f$ y $g \in \mathbb{K}[X]$ son coprimos si $(f:g)=1$ \\ \\
+
+\propiedades
+\begin{itemize}
+	\item $(f:g)=(g:f)$
+	\item $f$ y $f'$ asociados, $g,g'$ asociados. Entonces $(f:g)=(f':g')$
+	\item $p$ es irreducible mónico $\in \mathbb{K}[X]$,$f \in \mathbb{K}[X]$ $(p:f) = 
+	\left\{
+		\begin{array}{l}
+    			p \mbox{ si } p \mid f
+  		\\  1 \mbox{ de lo contrario }
+	\end{array}
+	\right.$
+	\item si $f \mid g \Rightarrow (f:g)=a^{-1}f$ donde $a$ es el coeficiente principal de $f$
+	\item $(f:0)=a^{-1}f$ donde $a$ es el coeficiente principal de $f$ 
+	\item $f$ y $g \in \mathbb{K}[X]$ son coprimos sii $\exists \alpha,\beta \in \mathbb{K}[X]$ tal que $1 = \alpha f + \beta g$
+	\item $\frac{f}{(f:g)}$ y $\frac{g}{(f:g)} \in \mathbb{K}[X]$
+	\item $\left( \frac{f}{(f:g)},\frac{g}{(f:g)} \right)=1$
+	\item $a$ y $b \in \mathbb{K}$, si $a \neq b$ entonces $(X-a:X-b)=1$
+	\item si $f,g,k \in \mathbb{K}[X], \ \ (f:g)=(f+kg,g)$
+	\item si $f \equiv r (g)$. Entonces $(f:g)=(f:r)$
+	\item $f,g,h \in \mathbb{K}[X]$. Si $f \mid gh$ y $(f:g)=1 \Rightarrow f \mid h$
+	\item $f,g,h \in \mathbb{K}[X]$. Si $(f:g)=1$ y $f \mid h$, $g \mid h \Rightarrow fg \mid h$
+\end{itemize}
+
+
+\subsection{Raíces de polinomios}
+
+
+\teorema Todo polinomio $f \in \mathbb{K}[X]$ se puede escribir como una única descomposición en polinomios mónicos irreducibles de la siguiente forma.
+$$f = s \prod_{i=0}^{\infty} {{p_{i}}^{\mathcal{V}_{p_i}(f)}}$$ \ \ con $p_1,p_2,\cdots$ los polinomios irreducibles,mónicos y $\mathcal{V}_{p_i} (f)$ el exponente al que está elevado el polinomio mónico \\ \\
+
+\definicion $a \in \mathbb{K},f \in \mathbb{K}[X]$, $a$ es raíz de $f$ si y solo si $f(a) = 0$ \\ \\
+
+\teorema $f = a_0 + a_1 X + ... + a_n X^{n}, \ a_n \neq 0 $ con coeficientes enteros, $p \in \mathbb{Z} q \in \mathbb{N}$ tales que $p \perp q$ si $\dfrac{p}{q}$ es raíz de $f$ entonces $p \mid a_0$, $q \mid a_n$, $p-q \mid f(1)$ y $p+q \mid f(-1)$ \\ \\
+\clearpage
+
+\propiedades
+\begin{itemize}
+	\item $f \in \mathbb{Q}[X], \ a,b \in \mathbb{Z}, \ d \in \mathbb{N}$. $f(a+b\sqrt{d})=0 \Leftrightarrow f(a-b\sqrt{d}) = 0$
+	\item $f \in \mathbb{R}[X], w \in \mathbb{C}. f(w) = 0 \Leftrightarrow f(\overline{w}) = 0$
+	\item $f \in \mathbb{K}[X], a \in \mathbb{K}. f(a) = 0 \Leftrightarrow (x-a) \mid f$
+	\item $\displaystyle f = \sum_{i=0}^{n} {x^{n-1}}$ tiene como raíces a todo $(G_{n}-G_{1})$
+	\item $f \in \mathbb{R}[X]$ y $gr(f) \equiv 1 (2)$ $f$ tiene al menos una raíz en $\mathbb{R}$
+	\item $f \in \mathbb{K}[X]$, $gr(f) \geq 2$ y $f$ es irreducible en $\mathbb{K}[X]$ entonces $f$ no tiene raíces en $\mathbb{K}[X]$
+	\item $f \in \mathbb{K}[X]$, $gr(f) = 2 \mbox{ o } 3$, luego $f$ es irreducible en $\mathbb{K}[X] \Leftrightarrow f$ no tiene raíces en $\mathbb{K}$
+\end{itemize}
+
+
+\clearpage
+
+\end{document}
